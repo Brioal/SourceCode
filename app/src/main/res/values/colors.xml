@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4CAE50</color>
+    <color name="colorGreen">#4CAE50</color>
+    <color name="colorPrimaryDark">#4CAE50</color>
+    <color name="colorAccent">#4CAE50</color>
+    <color name="colorLauncherbg">#ffffff</color>
+    <color name="colorUIBack">#EDEDED</color>
+    <color name="colorUIFront">#ffffff</color>
+    <color name="colorText">#1e1e1e</color>
+    <color name="colorTabTextNormal">#9cffffff</color>
+    <color name="colorTabTextSelected">#ffffff</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorLightBlack">#505050</color>
+    <color name="colorTrans">#00000000</color>
+    <color name="colorLightWhite">#69ffffff</color>
+    <color name="colorLightLightBlack">#a2505050</color>
+    <color name="home_tv_title">#333333</color>
+    <color name="home_btn_ib">#D7DAE2</color>
+</resources>

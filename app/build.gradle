@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.brioal.sourcecode"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:support-vector-drawable:25.2.0'
+    testCompile 'junit:junit:4.12'
+    //Klog
+    compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
+    //ButterKnife
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    //自定义样式的Toast
+    compile 'com.muddzdev:styleabletoast:1.0.6'
+    //通用下拉刷新
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    //Bmob SDK
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    compile 'cn.bmob.android:http-legacy:1.0'
+    //Styleable Toast
+    compile 'com.muddzdev:styleabletoast:1.0.6'
+    //圆形头像
+    compile 'com.github.Brioal:CircleImageView:1.0'
+}
