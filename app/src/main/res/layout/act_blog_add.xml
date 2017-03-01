@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightWhite"
+    android:orientation="vertical"
+    tools:context="com.brioal.sourcecode.addblog.BlogAddActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/add_blog_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:theme="@style/WhiteControalToolBar"
+        app:title="文章分享"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:text="请选择一个分类"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"/>
+
+    <com.brioal.labelview.LabelView
+        android:id="@+id/add_blog_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        >
+
+    </com.brioal.labelview.LabelView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:text="你可以给你的文章添加一个配图"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/add_blog_iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"/>
+
+    <Button
+        android:id="@+id/add_blog_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/addblog_btn_bg"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:text="添加"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+
+
+</LinearLayout>

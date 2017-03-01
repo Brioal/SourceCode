@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.brioal.sourcecode.login.LoginActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="猿代码"
+        android:textColor="@android:color/white"
+        android:textSize="42sp"/>
+
+    <EditText
+        android:id="@+id/register_et_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bmob_update_dialog_bg"
+        android:drawableLeft="@drawable/ic_mail_black"
+        android:drawablePadding="10dp"
+        android:hint="请输入邮箱"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:text="brioal@foxmail.com"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/register_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bmob_update_dialog_bg"
+        android:drawableLeft="@drawable/ic_account_black"
+        android:drawablePadding="10dp"
+        android:hint="请输入用户名"
+        android:padding="10dp"
+        android:text="Brioal"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/register_et_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bmob_update_dialog_bg"
+        android:drawableLeft="@drawable/ic_pass_black"
+        android:drawablePadding="10dp"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:text="q"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/register_et_pass_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bmob_update_dialog_bg"
+        android:drawableLeft="@drawable/ic_lock_black"
+        android:drawablePadding="10dp"
+        android:hint="再次输入密码"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:text="q"
+        android:textSize="18sp"/>
+
+
+    <Button
+        android:id="@+id/register_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bmob_update_dialog_bg"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:text="注册"
+        android:textColor="@color/colorGreen"
+        android:textSize="18sp"/>
+
+    <ImageButton
+        android:id="@+id/register_btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        app:srcCompat="@drawable/ic_close_white"/>
+
+</LinearLayout>

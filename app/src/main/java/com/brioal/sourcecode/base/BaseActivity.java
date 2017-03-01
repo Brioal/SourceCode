@@ -34,13 +34,15 @@ public class BaseActivity extends AppCompatActivity {
         st.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         st.setTextColor(Color.WHITE);
         st.setIcon(R.drawable.ic_done_white);
-        st.spinIcon();
         st.setMaxAlpha();
         st.show();
     }
 
     //显示操作失败
     protected void showFailed(String msg) {
+        if (msg == null) {
+            return;
+        }
         if (msg.isEmpty()) {
             return;
         }
@@ -48,7 +50,6 @@ public class BaseActivity extends AppCompatActivity {
         st.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
         st.setTextColor(Color.WHITE);
         st.setIcon(R.drawable.ic_error_white);
-        st.spinIcon();
         st.setMaxAlpha();
         st.show();
     }

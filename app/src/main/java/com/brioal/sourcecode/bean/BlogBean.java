@@ -18,7 +18,26 @@ public class BlogBean extends BmobObject {
     private long mTime;//发表时间
     private BlogTypeBean mTypeBean;//所属分类
     private BmobFile mImg;//文章配图
+    private int mCollectCount = 0;//文章收藏数量
+    private int mCommentCount = 0;//文章评论数量
 
+    public int getCollectCount() {
+        return mCollectCount;
+    }
+
+    public BlogBean setCollectCount(int collectCount) {
+        mCollectCount = collectCount;
+        return this;
+    }
+
+    public int getCommentCount() {
+        return mCommentCount;
+    }
+
+    public BlogBean setCommentCount(int commentCount) {
+        mCommentCount = commentCount;
+        return this;
+    }
 
     public UserBean getUserBean() {
         return mUserBean;

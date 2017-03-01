@@ -10,24 +10,34 @@ import cn.bmob.v3.BmobObject;
  */
 
 public class BlogCollectionBean extends BmobObject {
-    private String mBlogID;//博客的ID
-    private String mUserID;//用户的ID
+    private BlogBean mBlogBean;//博客的ID
+    private UserBean mUserBean;//用户的ID
+    private long mTime;//时间
 
-    public String getBlogID() {
-        return mBlogID;
+    public long getTime() {
+        return mTime;
     }
 
-    public BlogCollectionBean setBlogID(String blogID) {
-        mBlogID = blogID;
+    public BlogCollectionBean setTime(long time) {
+        mTime = time;
         return this;
     }
 
-    public String getUserID() {
-        return mUserID;
+    public BlogBean getBlogBean() {
+        return mBlogBean;
     }
 
-    public BlogCollectionBean setUserID(String userID) {
-        mUserID = userID;
+    public BlogCollectionBean setBlogBean(BlogBean blogBean) {
+        mBlogBean = blogBean;
+        return this;
+    }
+
+    public UserBean getUserBean() {
+        return mUserBean;
+    }
+
+    public BlogCollectionBean setUserBean(UserBean userBean) {
+        mUserBean = userBean;
         return this;
     }
 }

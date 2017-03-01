@@ -34,7 +34,6 @@ public class BaseFragment extends Fragment {
         st.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         st.setTextColor(Color.WHITE);
         st.setIcon(R.drawable.ic_done_white);
-        st.spinIcon();
         st.setMaxAlpha();
         st.show();
     }
@@ -48,7 +47,6 @@ public class BaseFragment extends Fragment {
         st.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
         st.setTextColor(Color.WHITE);
         st.setIcon(R.drawable.ic_error_white);
-        st.spinIcon();
         st.setMaxAlpha();
         st.show();
     }

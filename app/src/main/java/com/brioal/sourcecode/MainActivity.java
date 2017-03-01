@@ -14,6 +14,7 @@ import com.brioal.sourcecode.mine.MineFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.Bmob;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -21,6 +22,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     BottomNavigationView mNavigation;
 
     private BaseFragment mCurrentFragment;
+    private final String APPID = "cc06111b6eb97dfa780e455f7230486a";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         ButterKnife.bind(this);
         initNavigationView();
         changeFragment(HomeFragment.getInstance());
+        initSDK();
+    }
+
+    private void initSDK() {
+        Bmob.initialize(mContext, APPID);
     }
 
     //初始化导航栏

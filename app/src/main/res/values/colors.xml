@@ -13,8 +13,8 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorLightBlack">#505050</color>
     <color name="colorTrans">#00000000</color>
-    <color name="colorLightWhite">#69ffffff</color>
-    <color name="colorLightLightBlack">#a2505050</color>
+    <color name="colorLightWhite">#F5F7F8</color>
+    <color name="colorLightLightBlack">#C8CED5</color>
     <color name="home_tv_title">#333333</color>
-    <color name="home_btn_ib">#D7DAE2</color>
+    <color name="home_btn_ib">#C8CED5</color>
 </resources>

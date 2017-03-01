@@ -10,27 +10,27 @@ import cn.bmob.v3.BmobObject;
  */
 
 public class BlogCommentBean extends BmobObject {
-    private String mBlogID;//博客的ID
-    private String mUserID;//用户的ID
+    private BlogBean mBlogBean;//博客的ID
+    private UserBean mUserBean;//用户的ID
     private String mContent;//评论的内容
-    private String mParentID;//父评论的ID
+    private BlogCommentBean mParentBean;//父评论的ID
 
 
-    public String getBlogID() {
-        return mBlogID;
+    public BlogBean getBlogBean() {
+        return mBlogBean;
     }
 
-    public BlogCommentBean setBlogID(String blogID) {
-        mBlogID = blogID;
+    public BlogCommentBean setBlogBean(BlogBean blogBean) {
+        mBlogBean = blogBean;
         return this;
     }
 
-    public String getUserID() {
-        return mUserID;
+    public UserBean getUserBean() {
+        return mUserBean;
     }
 
-    public BlogCommentBean setUserID(String userID) {
-        mUserID = userID;
+    public BlogCommentBean setUserBean(UserBean userBean) {
+        mUserBean = userBean;
         return this;
     }
 
@@ -43,12 +43,12 @@ public class BlogCommentBean extends BmobObject {
         return this;
     }
 
-    public String getParentID() {
-        return mParentID;
+    public BlogCommentBean getParentBean() {
+        return mParentBean;
     }
 
-    public BlogCommentBean setParentID(String parentID) {
-        mParentID = parentID;
+    public BlogCommentBean setParentBean(BlogCommentBean parentBean) {
+        mParentBean = parentBean;
         return this;
     }
 }

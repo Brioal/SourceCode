@@ -26,6 +26,8 @@ public class UserBean extends BmobUser {
         return this;
     }
 
+
+
     public String getDesc() {
         return mDesc;
     }
