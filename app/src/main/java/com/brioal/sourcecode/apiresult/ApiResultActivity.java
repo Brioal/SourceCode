@@ -1,22 +1,23 @@
-package com.brioal.sourcecode.lib;
+package com.brioal.sourcecode.apiresult;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.brioal.sourcecode.R;
-import com.brioal.sourcecode.base.BaseFragment;
-import com.brioal.sourcecode.bean.LibBean;
-import com.brioal.sourcecode.lib.contract.LibContract;
-import com.brioal.sourcecode.lib.presenter.LibPresenterImpl;
+import com.brioal.sourcecode.apiresult.contract.ApiResultContract;
+import com.brioal.sourcecode.apiresult.presenter.ApiResultPresenterImpl;
+import com.brioal.sourcecode.base.BaseActivity;
+import com.brioal.sourcecode.bean.ApiBean;
 
 import java.util.List;
 
@@ -26,47 +27,45 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
-/**
- * Github : https://github.com/Brioal
- * Email : brioal@foxmial.com
- * Created by Brioal on 2017/2/24.
- */
+public class ApiResultActivity extends BaseActivity implements ApiResultContract.View {
 
-public class LibFragment extends BaseFragment implements LibContract.View {
-    private static LibFragment sFragment;
-    @BindView(R.id.lib_iv_loading)
-    ImageView mIvLoading;
-    @BindView(R.id.lib_recyclerView)
+    @BindView(R.id.api_result_toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.api_result_recyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.lib_layout)
+    @BindView(R.id.api_result_iv_loading)
+    ImageView mIvLoading;
+    @BindView(R.id.api_result_layout)
     PtrFrameLayout mLayout;
 
-    public static LibFragment getInstance() {
-        if (sFragment == null) {
-            sFragment = new LibFragment();
-        }
-        return sFragment;
-    }
-
-    private LibPresenterImpl mPresenter;
-    private View mRootView;
     private boolean isRefreshing = false;
-    private LibAdapter mLibAdapter;
+    private ApiResultPresenterImpl mPresenter;
+    private String mKey = "";
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, mRootView);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_api_result);
+        ButterKnife.bind(this);
+        initData();
         initView();
         initPresenter();
     }
 
+    private void initData() {
+        mKey = getIntent().getStringExtra("Key");
+    }
+
     private void initPresenter() {
-        mPresenter = new LibPresenterImpl(this);
-        mPresenter.start();
+        mPresenter = new ApiResultPresenterImpl(this);
+        mPresenter.start(mKey);
     }
 
     private void initView() {
+        //标题栏
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(mKey + " 的搜索结果");
         //下拉刷新
         mLayout.setPtrHandler(new PtrHandler() {
             @Override
@@ -101,41 +100,50 @@ public class LibFragment extends BaseFragment implements LibContract.View {
                     }
                 });
                 mIvLoading.startAnimation(animation);
-                mPresenter.refresh();
+                mPresenter.start(mKey);
             }
         });
         mLayout.setOffsetToRefresh(100);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fra_lib, container, false);
-        return mRootView;
+    public void showLoading() {
+        mLayout.autoRefresh();
     }
 
     @Override
-    public void showRefresh() {
-        mLayout.setOffsetToRefresh(100);
-    }
-
-    @Override
-    public void showRefreshDone() {
+    public void showLoadDone(List<ApiBean> list) {
         mLayout.refreshComplete();
-    }
-
-    @Override
-    public void showLib(List<LibBean> list) {
-        mLibAdapter = new LibAdapter(mContext);
-        mLibAdapter.showList(list);
+        ApiResultAdapter adapter = new ApiResultAdapter(mContext);
+        adapter.showList(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mRecyclerView.setAdapter(mLibAdapter);
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void showRefreshFailed(String errorMsg) {
-        //刷新失败
+    public void showLoadingFailed(String errorMsg) {
         mLayout.refreshComplete();
         showFailed(errorMsg);
+    }
+
+    @Override
+    public Context getContext() {
+        return mContext;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public static void enterResult(Context context, String key) {
+        Intent intent = new Intent(context, ApiResultActivity.class);
+        intent.putExtra("Key", key);
+        context.startActivity(intent);
     }
 }

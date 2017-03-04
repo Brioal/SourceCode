@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightWhite"
+    android:orientation="vertical">
+    <!--标题栏-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Api查询"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+    <!--搜索框-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/search_et_bg"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <EditText
+            android:inputType="textEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/api_et_key"
+            android:layout_weight="1"
+            android:hint="请输入关键字"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorLightBlack"
+            android:textColorHint="@color/colorLightBlack"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:id="@+id/api_btn_search"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/addblog_btn_bg"
+            android:text="搜索"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+    <!--挑战按钮-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/api_tv_class"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/class_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/api_tv_package"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/package_name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
+    </LinearLayout>
+    <!--历史劣列表-->
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/api_recyclerView"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

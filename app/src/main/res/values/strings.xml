@@ -5,4 +5,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_lib">开源库</string>
     <string name="title_mine">个人中心</string>
+    <string name="class_name"><u>class列表</u></string>
+    <string name="package_name"><u>package列表</u></string>
 </resources>

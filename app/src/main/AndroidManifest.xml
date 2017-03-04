@@ -31,7 +31,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
         <activity
             android:name=".addblog.BlogAddActivity"
@@ -48,7 +47,14 @@
         <activity
             android:name=".useredit.UserEditActivity"
             android:theme="@style/CodeTheme.NoActionBar">
-
+        </activity>
+        <activity
+            android:name=".apiresult.ApiResultActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".classlist.ClassListActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
         </activity>
     </application>
 
