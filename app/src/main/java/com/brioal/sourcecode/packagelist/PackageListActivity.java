@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.classlist;
+package com.brioal.sourcecode.packagelist;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,48 +12,57 @@ import com.brioal.index.IndexBean;
 import com.brioal.index.IndexListView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
-import com.brioal.sourcecode.classlist.contract.ClassListContract;
-import com.brioal.sourcecode.classlist.presenter.ClassListPresenterImpl;
+import com.brioal.sourcecode.packagelist.contract.PackageContract;
+import com.brioal.sourcecode.packagelist.presenter.PackagePresenterImpl;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ClassListActivity extends BaseActivity implements ClassListContract.View {
+public class PackageListActivity extends BaseActivity implements PackageContract.View {
 
-    @BindView(R.id.class_list_toolBar)
+    @BindView(R.id.package_list_toolBar)
     Toolbar mToolBar;
-    @BindView(R.id.class_list_recyclerView)
+    @BindView(R.id.package_list_recyclerView)
     IndexListView mRecyclerView;
-    private ClassListPresenterImpl mPresenter;
+
     private ProgressDialog mProgressDialog;
+    private PackagePresenterImpl mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_class_list);
+        setContentView(R.layout.act_package_list);
         ButterKnife.bind(this);
         initView();
         initPresenter();
     }
 
     private void initPresenter() {
-        mPresenter = new ClassListPresenterImpl(this);
+        mPresenter = new PackagePresenterImpl(this);
         mPresenter.start();
     }
 
     private void initView() {
-        //标题栏
+        //ToolBar
         setSupportActionBar(mToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
-    public static void enterClassList(Context context) {
-        Intent intent = new Intent(context, ClassListActivity.class);
+    public static void enterPackageList(Context context) {
+        Intent intent = new Intent(context, PackageListActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -70,7 +79,7 @@ public class ClassListActivity extends BaseActivity implements ClassListContract
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
-        IndexAdapter adapter = new ClassListAdapter(mContext);
+        IndexAdapter adapter = new PackageListAdapter(mContext);
         mRecyclerView.setData(list).setAdapter(adapter).isIndexBG(true).build();
     }
 
@@ -85,15 +94,5 @@ public class ClassListActivity extends BaseActivity implements ClassListContract
     @Override
     public Context getContext() {
         return mContext;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -9,18 +9,18 @@
     tools:context="com.brioal.sourcecode.classlist.ClassListActivity">
 
     <android.support.v7.widget.Toolbar
-        app:theme="@style/WhiteControalToolBar"
-        android:id="@+id/class_list_toolBar"
+        android:id="@+id/package_list_toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:title="class 列表"
+        app:theme="@style/WhiteControalToolBar"
+        app:title="package 列表"
         app:titleTextColor="@android:color/white">
 
     </android.support.v7.widget.Toolbar>
 
     <com.brioal.index.IndexListView
-        android:id="@+id/class_list_recyclerView"
+        android:id="@+id/package_list_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

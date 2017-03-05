@@ -1,5 +1,7 @@
 package com.brioal.sourcecode.lib;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,9 +12,11 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.brioal.sourcecode.R;
+import com.brioal.sourcecode.addlib.AddLibActivity;
 import com.brioal.sourcecode.base.BaseFragment;
 import com.brioal.sourcecode.bean.LibBean;
 import com.brioal.sourcecode.lib.contract.LibContract;
@@ -40,6 +44,10 @@ public class LibFragment extends BaseFragment implements LibContract.View {
     RecyclerView mRecyclerView;
     @BindView(R.id.lib_layout)
     PtrFrameLayout mLayout;
+    @BindView(R.id.lib_btn_add)
+    ImageButton mBtnAdd;
+    @BindView(R.id.lib_btn_sort)
+    ImageButton mBtnSort;
 
     public static LibFragment getInstance() {
         if (sFragment == null) {
@@ -105,6 +113,22 @@ public class LibFragment extends BaseFragment implements LibContract.View {
             }
         });
         mLayout.setOffsetToRefresh(100);
+        //添加
+        mBtnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AddLibActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+        //搜索
+        mBtnSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2017/3/5 Search
+            }
+        });
+
     }
 
     @Nullable
@@ -137,5 +161,13 @@ public class LibFragment extends BaseFragment implements LibContract.View {
         //刷新失败
         mLayout.refreshComplete();
         showFailed(errorMsg);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
+            mPresenter.refresh();
+        }
     }
 }

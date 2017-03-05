@@ -13,11 +13,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.brioal.index.IndexBean;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.apiresult.contract.ApiResultContract;
 import com.brioal.sourcecode.apiresult.presenter.ApiResultPresenterImpl;
 import com.brioal.sourcecode.base.BaseActivity;
-import com.brioal.sourcecode.bean.ApiBean;
 
 import java.util.List;
 
@@ -112,7 +112,7 @@ public class ApiResultActivity extends BaseActivity implements ApiResultContract
     }
 
     @Override
-    public void showLoadDone(List<ApiBean> list) {
+    public void showLoadDone(List<IndexBean> list) {
         mLayout.refreshComplete();
         ApiResultAdapter adapter = new ApiResultAdapter(mContext);
         adapter.showList(list);

@@ -17,6 +17,8 @@ import com.brioal.sourcecode.api.contract.ApiContract;
 import com.brioal.sourcecode.api.presenter.ApiPresenterImpl;
 import com.brioal.sourcecode.apiresult.ApiResultActivity;
 import com.brioal.sourcecode.base.BaseFragment;
+import com.brioal.sourcecode.classlist.ClassListActivity;
+import com.brioal.sourcecode.packagelist.PackageListActivity;
 
 import java.util.List;
 
@@ -91,14 +93,14 @@ public class ApiFragment extends BaseFragment implements ApiContract.View {
         mTvClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/3/3 跳转class列表
+                ClassListActivity.enterClassList(mContext);
             }
         });
         //跳转package
         mTvPackage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/3/3 跳转class列表
+                PackageListActivity.enterPackageList(mContext);
             }
         });
     }

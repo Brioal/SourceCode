@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.brioal.sourcecode.addlib.AddLibActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/add_blog_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:theme="@style/WhiteControalToolBar"
+        app:title="开源库添加"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+    <!--地址-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="请输入开源库地址"
+        android:padding="5dp"
+        android:textColorHint="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/add_lib_et_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
+    </android.support.design.widget.TextInputLayout>
+    <!--标题-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="请输入开源库标题"
+        android:padding="5dp"
+        android:textColorHint="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/add_lib_et_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
+    </android.support.design.widget.TextInputLayout>
+    <!--描述-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="请输入开源库描述"
+        android:padding="5dp"
+        android:textColorHint="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/add_lib_et_desc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
+    </android.support.design.widget.TextInputLayout>
+    <!--标签-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="请输入开源库标签"
+        android:padding="5dp"
+        android:textColorHint="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/add_lib_et_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/add_lib_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/addblog_btn_bg"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:text="添加"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+</LinearLayout>

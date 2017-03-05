@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.brioal.index.IndexBean;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.ApiBean;
@@ -26,14 +27,14 @@ import butterknife.ButterKnife;
 public class ApiResultAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context mContext;
-    private List<ApiBean> mList = new ArrayList<>();
+    private List<IndexBean> mList = new ArrayList<>();
 
 
     public ApiResultAdapter(Context context) {
         mContext = context;
     }
 
-    public void showList(List<ApiBean> list) {
+    public void showList(List<IndexBean> list) {
         mList.clear();
         mList.addAll(list);
     }

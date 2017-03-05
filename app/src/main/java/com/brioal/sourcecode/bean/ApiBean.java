@@ -1,5 +1,7 @@
 package com.brioal.sourcecode.bean;
 
+import com.brioal.index.IndexBean;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * Created by Brioal on 2017/3/4.
  */
 
-public class ApiBean implements Serializable {
+public class ApiBean implements Serializable ,IndexBean{
     private String mName;//api的名称
     private String mUrl;//api的地址
     private int mType;//api的类型
@@ -44,5 +46,10 @@ public class ApiBean implements Serializable {
     public ApiBean setType(int type) {
         mType = type;
         return this;
+    }
+
+    @Override
+    public char getIndex() {
+        return (mName.charAt(0)+"").toUpperCase().charAt(0);
     }
 }

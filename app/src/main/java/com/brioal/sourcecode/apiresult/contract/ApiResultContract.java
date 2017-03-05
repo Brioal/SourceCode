@@ -2,7 +2,7 @@ package com.brioal.sourcecode.apiresult.contract;
 
 import android.content.Context;
 
-import com.brioal.sourcecode.bean.ApiBean;
+import com.brioal.index.IndexBean;
 import com.brioal.sourcecode.interfaces.OnApiBeanLoadListener;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ApiResultContract {
     public interface View {
         void showLoading();//显示正在加载
 
-        void showLoadDone(List<ApiBean> list);//加载搜索结果
+        void showLoadDone(List<IndexBean> list);//加载搜索结果
 
         void showLoadingFailed(String errorMsg);//显示加载失败
 

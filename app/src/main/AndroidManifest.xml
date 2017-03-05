@@ -56,6 +56,12 @@
             android:name=".classlist.ClassListActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".packagelist.PackageListActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity android:name=".addlib.AddLibActivity">
+        </activity>
     </application>
 
 </manifest>

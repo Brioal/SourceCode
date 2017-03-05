@@ -27,6 +27,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
+        <ImageButton
+            android:id="@+id/lib_btn_add"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_add_white"/>
+
+        <ImageButton
+            android:id="@+id/lib_btn_sort"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_search_white"/>
 
     </LinearLayout>
 

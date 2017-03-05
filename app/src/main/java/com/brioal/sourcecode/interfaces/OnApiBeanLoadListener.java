@@ -1,6 +1,6 @@
 package com.brioal.sourcecode.interfaces;
 
-import com.brioal.sourcecode.bean.ApiBean;
+import com.brioal.index.IndexBean;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface OnApiBeanLoadListener {
     //加载成功
-    void success(List<ApiBean> list);
+    void success(List<IndexBean> list);
 
     //加载失败
     void failed(String errorMsg);
