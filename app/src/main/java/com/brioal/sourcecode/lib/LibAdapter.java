@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.LibBean;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ import butterknife.ButterKnife;
  */
 
 public class LibAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+
 
     private Context mContext;
     private List<LibBean> mList = new ArrayList<>();
@@ -56,14 +59,24 @@ public class LibAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     //开源库ViewHolder
     class LibViewHolder extends BaseViewHolder {
-        @BindView(R.id.item_lib_tv_title)
-        TextView mTvTitle;
-        @BindView(R.id.item_lib_tv_desc)
-        TextView mTvDesc;
-        @BindView(R.id.item_lib_tv_label)
-        TextView mTvLabel;
-        @BindView(R.id.item_lib_tv_time)
+        @BindView(R.id.lib_ic_head)
+        CircleImageView mIcHead;
+        @BindView(R.id.lib_tv_name)
+        TextView mTvName;
+        @BindView(R.id.lib_tv_author_desc)
+        TextView mTvAuthorDesc;
+        @BindView(R.id.lib_tv_type)
+        TextView mTvType;
+        @BindView(R.id.lib_tv_time)
         TextView mTvTime;
+        @BindView(R.id.lib_tv_title)
+        TextView mTvTitle;
+        @BindView(R.id.lib_tv_desc)
+        TextView mTvDesc;
+        @BindView(R.id.lib_tv_collect)
+        TextView mTvCollect;
+        @BindView(R.id.lib_tv_comment)
+        TextView mTvComment;
 
         View mItemView;
 
@@ -76,10 +89,17 @@ public class LibAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void bindView(Object object, int position) {
             LibBean bean = (LibBean) object;
+            mTvName.setText(bean.getUserBean().getUsername());
+            mTvAuthorDesc.setText(bean.getUserBean().getDesc());
+            mTvType.setText(bean.getLabel());
+            mTvTime.setText(bean.getCreatedAt());
+            Glide.with(mContext).load(bean.getUserBean().getHead().getFileUrl()).into(mIcHead);
+
             mTvTitle.setText(bean.getTitle());
             mTvDesc.setText(bean.getDesc());
-            mTvLabel.setText(bean.getLabel());
-            mTvTime.setText(bean.getCreatedAt());
+
+            mTvCollect.setText(bean.getCollectCount() + "");
+            mTvComment.setText(bean.getCommentCount() + "");
 
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -19,13 +19,16 @@ import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.addlib.AddLibActivity;
 import com.brioal.sourcecode.base.BaseFragment;
 import com.brioal.sourcecode.bean.LibBean;
+import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.lib.contract.LibContract;
 import com.brioal.sourcecode.lib.presenter.LibPresenterImpl;
+import com.brioal.sourcecode.libsearch.LibSearchActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -117,6 +120,11 @@ public class LibFragment extends BaseFragment implements LibContract.View {
         mBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserBean userBean = BmobUser.getCurrentUser(UserBean.class);
+                if (userBean == null) {
+                    showFailed("登陆之后才能分享开源库,请前往个人中心登陆后重试");
+                    return;
+                }
                 Intent intent = new Intent(mContext, AddLibActivity.class);
                 startActivityForResult(intent, 0);
             }
@@ -125,7 +133,8 @@ public class LibFragment extends BaseFragment implements LibContract.View {
         mBtnSort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/3/5 Search
+                Intent intent = new Intent(mContext, LibSearchActivity.class);
+                mContext.startActivity(intent);
             }
         });
 

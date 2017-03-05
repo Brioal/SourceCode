@@ -60,7 +60,13 @@
             android:name=".packagelist.PackageListActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
-        <activity android:name=".addlib.AddLibActivity">
+        <activity
+            android:name=".addlib.AddLibActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".libsearch.LibSearchActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
         </activity>
     </application>
 
