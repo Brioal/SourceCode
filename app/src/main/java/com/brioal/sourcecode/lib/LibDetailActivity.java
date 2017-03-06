@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
@@ -51,32 +50,6 @@ public class LibDetailActivity extends BaseActivity {
     }
 
     private void initView() {
-        //返回按钮
-        mBtnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        if (mLibBean == null) {
-            return;
-        }
-        //标题显示
-        mTvTitle.setText(mLibBean.getTitle());
-        //连接分享
-        mBtnShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mLibBean == null) {
-                    return;
-                }
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, mLibBean.getUrl());
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "选择要分享的方式"));
-            }
-        });
         //下拉刷新
         mLayout.setPtrHandler(new PtrHandler() {
             @Override
@@ -115,12 +88,41 @@ public class LibDetailActivity extends BaseActivity {
             }
         });
         mLayout.setOffsetToRefresh(100);
+        mLayout.autoRefresh(true);
+        //返回按钮
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        if (mLibBean == null) {
+            return;
+        }
+        //标题显示
+        mTvTitle.setText(mLibBean.getTitle());
+        //连接分享
+        mBtnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mLibBean == null) {
+                    return;
+                }
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, mLibBean.getUrl());
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "选择要分享的方式"));
+            }
+        });
         //网页加载
         mWebview.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
                 return true;
             }
+
 
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -128,6 +130,7 @@ public class LibDetailActivity extends BaseActivity {
                 mLayout.refreshComplete();
             }
         });
+        mWebview.loadUrl(mLibBean.getUrl());
     }
 
     private void initData() {

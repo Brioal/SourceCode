@@ -68,8 +68,8 @@ public class LibFragment extends BaseFragment implements LibContract.View {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, mRootView);
-        initView();
         initPresenter();
+        initView();
     }
 
     private void initPresenter() {
@@ -116,6 +116,7 @@ public class LibFragment extends BaseFragment implements LibContract.View {
             }
         });
         mLayout.setOffsetToRefresh(100);
+        mLayout.autoRefresh(true);
         //添加
         mBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -42,6 +42,8 @@ public class LibSearchContract {
 
         void loadResult(String key, OnLibLoadListener listener);//加载搜索结果
 
+        void addHistory(String key);//添加搜索记录
+
     }
 
 

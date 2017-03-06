@@ -22,6 +22,7 @@ import com.brioal.sourcecode.bean.LibBean;
 import com.brioal.sourcecode.lib.LibAdapter;
 import com.brioal.sourcecode.libsearch.contract.LibSearchContract;
 import com.brioal.sourcecode.libsearch.presenter.LibSearchPresenterImpl;
+import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -118,13 +119,14 @@ public class LibSearchActivity extends BaseActivity implements LibSearchContract
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     mKey = mEtKey.getText().toString().trim();
+                    KLog.e(mKey);
                     if (mKey.isEmpty()) {
                         showFailed("关键字不能为空");
-                        return false;
+                    } else {
+                        mPresenter.search(mKey);
                     }
-                    mPresenter.search(mKey);
                 }
-                return true;
+                return false;
             }
         });
     }

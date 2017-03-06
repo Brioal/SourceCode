@@ -24,14 +24,18 @@
             app:srcCompat="@drawable/ic_close_white"/>
 
         <EditText
+            android:singleLine="true"
+            android:inputType="text"
             android:id="@+id/lib_search_et_key"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
+            android:layout_gravity="center"
+            android:layout_margin="9dp"
             android:layout_weight="1"
             android:background="@drawable/lib_search_bg"
             android:drawableLeft="@drawable/ic_search_black"
             android:hint="请输入关键字搜索"
+            android:imeOptions="actionSearch"
             android:paddingLeft="5dp"/>
 
     </LinearLayout>

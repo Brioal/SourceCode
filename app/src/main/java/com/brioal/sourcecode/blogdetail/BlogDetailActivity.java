@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
@@ -118,6 +117,7 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
             }
         });
         mLayout.setOffsetToRefresh(100);
+        mLayout.autoRefresh(true);
         //返回按钮
         mBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,8 +167,10 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         mTvName.setText(mBlogBean.getUserBean().getUsername());
         //加载网页
         mWebview.setWebViewClient(new WebViewClient() {
+
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
                 return true;
             }
 
