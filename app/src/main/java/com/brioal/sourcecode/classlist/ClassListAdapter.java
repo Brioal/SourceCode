@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.brioal.index.IndexAdapter;
 import com.brioal.sourcecode.R;
+import com.brioal.sourcecode.api.ApiDetailActivity;
 import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.ApiBean;
 
@@ -61,13 +62,13 @@ public class ClassListAdapter extends IndexAdapter<BaseViewHolder> {
 
         @Override
         public void bindView(Object object, int position) {
-            ApiBean bean = (ApiBean) object;
+            final ApiBean bean = (ApiBean) object;
             mTvName.setText(bean.getName());
             mTvType.setText(bean.getType() == 0 ? "class" : "package");
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/3/5 Api Detail
+                    ApiDetailActivity.enterApiDetail(mContext,bean);
                 }
             });
             if (position == 0) {

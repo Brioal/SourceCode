@@ -4,8 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 波浪效果
@@ -16,108 +24,240 @@ import android.view.View;
 
 public class WaveView extends View {
 
-    private final int INIT_BASE_HEIGHT1 = 300;
-    private final int INIT_BASE_HEIGHT2 = 300;
-    private int mHeight;
-    private int mWidth;
-    private float[] mContentOneYs = null;
-    private float[] mContentTwoys = null;
-    private float[] mRestoreOnes = null;
-    private float[] mRestoreTwos = null;
-    private static final int SWINGONE = 40;
-    private static final int SWINGTWO = 80;
-    private static final int OFFSETONE = 0;
-    private static final int OFFSETTWO = 40;
-    private int mPosition1 = 0;
-    private int mPosition2 = 0;
-    private static final int STEP1 = 5;
-    private static final int STEP2 = 8;
-    private Paint mPaint1;
-    private Paint mPaint2;
+    private int mViewWidth;
+    private int mViewHeight;
 
+    /**
+     * 水位线
+     */
+    private float mLevelLine;
+
+    /**
+     * 波浪起伏幅度
+     */
+    private float mWaveHeight = 80;
+    /**
+     * 波长
+     */
+    private float mWaveWidth = 200;
+    /**
+     * 被隐藏的最左边的波形
+     */
+    private float mLeftSide;
+
+    private float mMoveLen;
+    /**
+     * 水波平移速度
+     */
+    public static final float SPEED = 1.7f;
+
+    private List<Point> mPointsList;
+    private Paint mPaint;
+    private Paint mTextPaint;
+    private Path mWavePath;
+    private boolean isMeasured = false;
+
+    private Timer timer;
+    private MyTimerTask mTask;
+    Handler updateHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            // 记录平移总位移
+            mMoveLen += SPEED;
+            // 水位上升
+            mLevelLine -= 0.1f;
+            if (mLevelLine < 0)
+                mLevelLine = 0;
+            mLeftSide += SPEED;
+            // 波形平移
+            for (int i = 0; i < mPointsList.size(); i++) {
+                mPointsList.get(i).setX(mPointsList.get(i).getX() + SPEED);
+                switch (i % 4) {
+                    case 0:
+                    case 2:
+                        mPointsList.get(i).setY(mLevelLine);
+                        break;
+                    case 1:
+                        mPointsList.get(i).setY(mLevelLine + mWaveHeight);
+                        break;
+                    case 3:
+                        mPointsList.get(i).setY(mLevelLine - mWaveHeight);
+                        break;
+                }
+            }
+            if (mMoveLen >= mWaveWidth) {
+                // 波形平移超过一个完整波形后复位
+                mMoveLen = 0;
+                resetPoints();
+            }
+            invalidate();
+        }
+
+    };
+
+    /**
+     * 所有点的x坐标都还原到初始状态，也就是一个周期前的状态
+     */
+    private void resetPoints() {
+        mLeftSide = -mWaveWidth;
+        for (int i = 0; i < mPointsList.size(); i++) {
+            mPointsList.get(i).setX(i * mWaveWidth / 4 - mWaveWidth);
+        }
+    }
 
     public WaveView(Context context) {
-        this(context, null);
+        super(context);
+        init();
     }
 
     public WaveView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init();
     }
 
-    public WaveView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public WaveView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         init();
     }
 
     private void init() {
-        mPaint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint1.setColor(Color.parseColor("#AB9DCF"));
-        mPaint1.setStrokeWidth(4);
-        mPaint1.setAlpha(155);
+        mPointsList = new ArrayList<Point>();
+        timer = new Timer();
 
-        mPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint2.setColor(Color.parseColor("#A2D1F3"));
-        mPaint2.setStrokeWidth(4);
-        mPaint2.setAlpha(155);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(Color.BLUE);
+
+        mTextPaint = new Paint();
+        mTextPaint.setColor(Color.BLUE);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setTextSize(30);
+
+        mWavePath = new Path();
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        // 开始波动
+        start();
+    }
+
+    private void start() {
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
+        }
+        mTask = new MyTimerTask(updateHandler);
+        timer.schedule(mTask, 0, 10);
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (w != 0 || h != 0 || w != oldw || h != oldh) {
-            mWidth = w;
-            mHeight = h;
-            calculatePoints();
+        if (!isMeasured) {
+            isMeasured = true;
+            mViewHeight = getMeasuredHeight();
+            mViewWidth = getMeasuredWidth();
+            // 水位线从最底下开始上升
+            mLevelLine = mViewHeight;
+            // 根据View宽度计算波形峰值
+            mWaveHeight = mViewWidth / 2.5f;
+            // 波长等于四倍View宽度也就是View中只能看到四分之一个波形，这样可以使起伏更明显
+            mWaveWidth = mViewWidth * 4;
+            // 左边隐藏的距离预留一个波形
+            mLeftSide = -mWaveWidth;
+            // 这里计算在可见的View宽度中能容纳几个波形，注意n上取整
+            int n = (int) Math.round(mViewWidth / mWaveWidth + 0.5);
+            // n个波形需要4n+1个点，但是我们要预留一个波形在左边隐藏区域，所以需要4n+5个点
+            for (int i = 0; i < (4 * n + 5); i++) {
+                // 从P0开始初始化到P4n+4，总共4n+5个点
+                float x = i * mWaveWidth / 4 - mWaveWidth;
+                float y = 0;
+                switch (i % 4) {
+                    case 0:
+                    case 2:
+                        // 零点位于水位线上
+                        y = mLevelLine;
+                        break;
+                    case 1:
+                        // 往下波动的控制点
+                        y = mLevelLine + mWaveHeight;
+                        break;
+                    case 3:
+                        // 往上波动的控制点
+                        y = mLevelLine - mWaveHeight;
+                        break;
+                }
+                mPointsList.add(new Point(x, y));
+            }
         }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.save();
-        changeRestorePosition();
-        for (int i = 0; i < mWidth; i++) {
-            final int x = i;
-            final float y1 = mRestoreOnes[i];
-            final float y2 = mRestoreTwos[i];
-            canvas.drawLine(x, y2, x, mHeight, mPaint2);
-            canvas.drawLine(x, y1, x, mHeight, mPaint1);
+
+        mWavePath.reset();
+        int i = 0;
+        mWavePath.moveTo(mPointsList.get(0).getX(), mPointsList.get(0).getY());
+        for (; i < mPointsList.size() - 2; i = i + 2) {
+            mWavePath.quadTo(mPointsList.get(i + 1).getX(),
+                    mPointsList.get(i + 1).getY(), mPointsList.get(i + 2)
+                            .getX(), mPointsList.get(i + 2).getY());
         }
-        invalidate();
+        mWavePath.lineTo(mPointsList.get(i).getX(), mViewHeight);
+        mWavePath.lineTo(mLeftSide, mViewHeight);
+        mWavePath.close();
+
+        // mPaint的Style是FILL，会填充整个Path区域
+        canvas.drawPath(mWavePath, mPaint);
+        // 绘制百分比
+        canvas.drawText("" + ((int) ((1 - mLevelLine / mViewHeight) * 100))
+                + "%", mViewWidth / 2, mLevelLine + mWaveHeight
+                + (mViewHeight - mLevelLine - mWaveHeight) / 2, mTextPaint);
     }
 
-    private void calculatePoints() {
-        mContentOneYs = new float[mWidth];
-        mContentTwoys = new float[mWidth];
-        mRestoreOnes = new float[mWidth];
-        mRestoreTwos = new float[mWidth];
-        for (int i = 0; i < mWidth; i++) {
-            mContentOneYs[i] = getYPosition(i, SWINGONE, OFFSETONE, INIT_BASE_HEIGHT1);
-            mContentTwoys[i] = getYPosition(i, SWINGTWO, OFFSETTWO, INIT_BASE_HEIGHT2);
+    class MyTimerTask extends TimerTask {
+        Handler handler;
+
+        public MyTimerTask(Handler handler) {
+            this.handler = handler;
         }
-    }
 
-
-    private void changeRestorePosition() {
-        if (mWidth != 0) {
-            mPosition1 = (mPosition1 + STEP1) % mWidth;
-            System.arraycopy(mContentOneYs, mPosition1, mRestoreOnes, 0, mWidth - mPosition1);
-            System.arraycopy(mContentOneYs, 0, mRestoreOnes, mWidth - mPosition1, mPosition1);
-
-            mPosition2 = (mPosition2 + STEP2) % mWidth;
-            System.arraycopy(mContentTwoys, mPosition2, mRestoreTwos, 0, mWidth - mPosition2);
-            System.arraycopy(mContentTwoys, 0, mRestoreTwos, mWidth - mPosition2, mPosition2);
+        @Override
+        public void run() {
+            handler.sendMessage(handler.obtainMessage());
         }
+
     }
 
-    private float getYPosition(int x, int swing, int offset, int baseHeight) {
-        float cycle = (float) (2 * Math.PI) / mWidth;
-        return (float) Math.sin(cycle * x + offset) * swing + baseHeight;
+    class Point {
+        private float x;
+        private float y;
+
+        public float getX() {
+            return x;
+        }
+
+        public void setX(float x) {
+            this.x = x;
+        }
+
+        public float getY() {
+            return y;
+        }
+
+        public void setY(float y) {
+            this.y = y;
+        }
+
+        public Point(float x, float y) {
+            this.x = x;
+            this.y = y;
+        }
+
     }
+
 }

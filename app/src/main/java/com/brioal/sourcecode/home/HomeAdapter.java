@@ -16,6 +16,7 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.BlogBean;
+import com.brioal.sourcecode.blogdetail.BlogDetailActivity;
 import com.brioal.sourcecode.interfaces.OnHotRefreshListener;
 import com.bumptech.glide.Glide;
 
@@ -173,12 +174,12 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void bindView(Object object, int position) {
-            BlogBean bean = (BlogBean) object;
+            final BlogBean bean = (BlogBean) object;
             //点击事件
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/27 进入博客界面
+                    BlogDetailActivity.enterBlogDetail(mContext, bean);
                 }
             });
             //刷新
@@ -256,12 +257,12 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void bindView(Object object, int position) {
-            BlogBean bean = (BlogBean) object;
+            final BlogBean bean = (BlogBean) object;
             //点击事件
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/27 进入博客界面
+                    BlogDetailActivity.enterBlogDetail(mContext, bean);
                 }
             });
             //标题
@@ -306,12 +307,12 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void bindView(Object object, int position) {
-            BlogBean bean = (BlogBean) object;
+            final BlogBean bean = (BlogBean) object;
             //点击事件
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/27 进入博客界面
+                    BlogDetailActivity.enterBlogDetail(mContext, bean);
                 }
             });
             //标题
@@ -365,12 +366,12 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void bindView(Object object, int position) {
-            BlogBean bean = (BlogBean) object;
+            final BlogBean bean = (BlogBean) object;
             //点击事件
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/27 进入博客界面
+                    BlogDetailActivity.enterBlogDetail(mContext, bean);
                 }
             });
             //标题

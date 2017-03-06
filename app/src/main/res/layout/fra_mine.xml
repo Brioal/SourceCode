@@ -51,6 +51,7 @@
         <com.brioal.sourcecode.view.WaveView
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:background="@android:color/white"
             />
         <!--用户头像-->
         <com.brioal.circleimage.CircleImageView
@@ -86,8 +87,8 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:layout_width="match_parent"
                         android:id="@+id/mine_tv_share"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="0"
@@ -157,8 +158,8 @@
             </LinearLayout>
             <!--关注-->
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/mine_tv_atten"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:drawableRight="@drawable/ic_more"
@@ -176,8 +177,8 @@
                 android:background="@android:color/white"/>
             <!--粉丝-->
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/mine_tv_fans"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:drawableRight="@drawable/ic_more"
@@ -195,8 +196,8 @@
                 android:background="@android:color/white"/>
             <!--设置-->
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/mine_tv_setting"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:drawableRight="@drawable/ic_more"

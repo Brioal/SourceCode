@@ -68,6 +68,16 @@
             android:name=".libsearch.LibSearchActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".api.ApiDetailActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".lib.LibDetailActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity android:name=".blogdetail.BlogDetailActivity">
+        </activity>
     </application>
 
 </manifest>

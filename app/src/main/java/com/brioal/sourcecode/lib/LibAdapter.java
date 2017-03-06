@@ -88,7 +88,7 @@ public class LibAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void bindView(Object object, int position) {
-            LibBean bean = (LibBean) object;
+            final LibBean bean = (LibBean) object;
             mTvName.setText(bean.getUserBean().getUsername());
             mTvAuthorDesc.setText(bean.getUserBean().getDesc());
             mTvType.setText(bean.getLabel());
@@ -104,7 +104,7 @@ public class LibAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/3/2 跳转开源库详情
+                    LibDetailActivity.enterLibDetail(mContext, bean);
                 }
             });
         }
