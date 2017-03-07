@@ -134,7 +134,7 @@ public class LibSearchActivity extends BaseActivity implements LibSearchContract
     @Override
     public void showHistory(List<String> list) {
         //显示历史记录
-        HistoryAdapter adapter = new HistoryAdapter(mContext);
+        LibHistoryAdapter adapter = new LibHistoryAdapter(mContext, mPresenter);
         adapter.showList(list);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerview.setAdapter(adapter);
