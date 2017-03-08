@@ -3,6 +3,7 @@ package com.brioal.sourcecode.home;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -154,7 +155,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         mBtnSort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFailed("排序");
+                showSortType();
             }
         });
         //下拉列表
@@ -172,7 +173,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void showRefreshing() {
-        mLayout.autoRefresh(true, 2000);
+        mLayout.autoRefresh();
     }
 
     @Override
@@ -288,5 +289,22 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             return content;
         }
         return "";
+    }
+
+    //显示排序方式
+    private void showSortType() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("请选择排序方式").setItems(new CharSequence[]{
+                "发帖时间",
+                "收藏数量",
+                "评论数量",
+                }
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSortType = which;
+                        mPresenter.refresh();
+                    }
+                }).setCancelable(true).create().show();
     }
 }

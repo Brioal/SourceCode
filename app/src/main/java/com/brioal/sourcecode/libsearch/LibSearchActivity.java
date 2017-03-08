@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brioal.sourcecode.R;
-import com.brioal.sourcecode.api.HistoryAdapter;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibBean;
 import com.brioal.sourcecode.lib.LibAdapter;

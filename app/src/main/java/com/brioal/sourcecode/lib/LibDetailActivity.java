@@ -88,7 +88,7 @@ public class LibDetailActivity extends BaseActivity {
             }
         });
         mLayout.setOffsetToRefresh(100);
-        mLayout.autoRefresh(true);
+        mLayout.autoRefresh();
         //返回按钮
         mBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override

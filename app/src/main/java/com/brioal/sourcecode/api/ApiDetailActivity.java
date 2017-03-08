@@ -56,7 +56,7 @@ public class ApiDetailActivity extends BaseActivity {
     }
 
     private void initView() {
-//下拉刷新
+        //下拉刷新
         mLayout.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
@@ -94,6 +94,7 @@ public class ApiDetailActivity extends BaseActivity {
             }
         });
         mLayout.setOffsetToRefresh(100);
+        mLayout.autoRefresh();
         //返回按钮
         mBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override

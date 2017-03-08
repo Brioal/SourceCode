@@ -23,6 +23,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private BaseFragment mCurrentFragment;
     private final String APPID = "cc06111b6eb97dfa780e455f7230486a";
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +74,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, fragment).commit();
         }
         mCurrentFragment = fragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - mLastClickTime < 2000) {
+            super.onBackPressed();
+        } else {
+            showFailed("再按一次退出键退出");
+            mLastClickTime = System.currentTimeMillis();
+        }
     }
 }

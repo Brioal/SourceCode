@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <com.brioal.circleimage.CircleImageView
+        android:id="@+id/item_comment_parent_head"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/item_comment_parent_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="用户名称"
+            android:textColor="@color/colorLightBlack"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/item_comment_parent_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_comment_parent_name"
+            android:layout_marginTop="5dp"
+            android:text="发布时间"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:id="@+id/item_comment_parent_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_comment_parent_time"
+            android:text="评论内容"
+            android:textColor="@color/colorLightBlack"
+            android:textSize="17sp"/>
+
+    </RelativeLayout>
+</LinearLayout>

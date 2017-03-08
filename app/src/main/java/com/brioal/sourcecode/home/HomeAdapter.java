@@ -229,6 +229,9 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mTvAuthor.setText(bean.getUserBean().getUsername() + "");
             //评论数量
             mTvComment.setText(bean.getCommentCount() + "");
+            if (bean.getImg() == null) {
+                return;
+            }
             //博客封面
             Glide.with(mContext).load(bean.getImg().getFileUrl()).into(mIvCover);
         }
@@ -274,6 +277,9 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             //评论数量
             mTvComment.setText(bean.getCommentCount() + "");
             //博客封面
+            if (bean.getImg() == null) {
+                return;
+            }
             Glide.with(mContext).load(bean.getImg().getFileUrl()).into(mIvCover);
         }
     }
@@ -288,8 +294,6 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvAuthor;
         @BindView(R.id.home_normal_tv_type)
         TextView mTvType;
-        @BindView(R.id.home_normal_tv_pic)
-        ImageView mTvPic;
         @BindView(R.id.home_normal_tv_title)
         TextView mTvTitle;
         @BindView(R.id.home_normal_tv_collect)
@@ -324,8 +328,6 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mTvAuthor.setText(bean.getUserBean().getPro() + "," + bean.getUserBean().getDesc());
             //评论数量
             mTvComment.setText(bean.getCommentCount() + "");
-            //默认封面
-            Glide.with(mContext).load(R.mipmap.ic_launcher).into(mTvPic);
             //用户名字
             mTvName.setText(bean.getUserBean().getUsername() + "");
             //作者

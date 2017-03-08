@@ -59,8 +59,19 @@ public class HomeModelImpl implements HomeContract.Model {
     public void loadList(int sortType, final OnBlogLoadListener listener) {
         //根据排序方式加载数据
         String sort = "-createdAt";//默认按照创建时间排序
-        // TODO: 2017/2/27 根据不同的排序方式执行不同的查询,默认按时间查询
+        switch (sortType) {
+            case 0:
+                sort = "-createdAt";
+                break;
+            case 1:
+                sort = "-mCollectCount";//按照收藏数量排序
+                break;
+            case 2:
+                sort = "-mCommentCount";//按照评论数量排序
+                break;
+        }
         BmobQuery<BlogBean> query = new BmobQuery<>();
+        query.order(sort);
         query.include("mUserBean,mTypeBean");
         query.findObjects(new FindListener<BlogBean>() {
             @Override

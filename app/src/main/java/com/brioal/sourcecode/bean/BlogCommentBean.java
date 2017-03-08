@@ -13,7 +13,7 @@ public class BlogCommentBean extends BmobObject {
     private BlogBean mBlogBean;//博客的ID
     private UserBean mUserBean;//用户的ID
     private String mContent;//评论的内容
-    private BlogCommentBean mParentBean;//父评论的ID
+    private String mParentBeanID;//父评论的ID
 
 
     public BlogBean getBlogBean() {
@@ -43,12 +43,12 @@ public class BlogCommentBean extends BmobObject {
         return this;
     }
 
-    public BlogCommentBean getParentBean() {
-        return mParentBean;
+    public String getParentBean() {
+        return mParentBeanID;
     }
 
-    public BlogCommentBean setParentBean(BlogCommentBean parentBean) {
-        mParentBean = parentBean;
+    public BlogCommentBean setParentBean(String parentBean) {
+        mParentBeanID = parentBean;
         return this;
     }
 }

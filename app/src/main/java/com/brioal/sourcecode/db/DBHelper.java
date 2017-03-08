@@ -11,8 +11,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-    private final String API_HISTORY_SQL = "CREATE TABLE history ( mKey text primary key , mTime long )";
-    private final String LIB_HISTORY_SQL = "CREATE TABLE libhistory ( mKey text primary key , mTime long )";
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -20,7 +18,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String API_HISTORY_SQL = "CREATE TABLE history ( mKey text primary key , mTime long )";
         db.execSQL(API_HISTORY_SQL);
+        String LIB_HISTORY_SQL = "CREATE TABLE libhistory ( mKey text primary key , mTime long )";
         db.execSQL(LIB_HISTORY_SQL);
     }
 

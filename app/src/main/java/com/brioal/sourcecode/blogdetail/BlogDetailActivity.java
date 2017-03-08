@@ -21,6 +21,7 @@ import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.blogdetail.contract.BlogDetailContract;
 import com.brioal.sourcecode.blogdetail.presenter.BlogDetailPresenterImpl;
+import com.brioal.sourcecode.commentlist.BlogCommentActivity;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -155,7 +156,7 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         mBtnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/3/6 跳转评论
+                BlogCommentActivity.enterBlogComment(mContext, mBlogBean);
             }
         });
         if (mBlogBean == null) {
