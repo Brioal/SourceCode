@@ -20,6 +20,8 @@ public class LibContract {
         void showLib(List<LibBean> list);//显示开源库列表
 
         void showRefreshFailed(String errorMsg);//显示刷新失败
+
+
     }
 
     public interface Presenter {

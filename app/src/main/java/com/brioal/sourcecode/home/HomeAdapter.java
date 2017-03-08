@@ -18,6 +18,7 @@ import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.blogdetail.BlogDetailActivity;
 import com.brioal.sourcecode.interfaces.OnHotRefreshListener;
+import com.brioal.sourcecode.util.DateUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -160,8 +161,8 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvCollections;
         @BindView(R.id.home_hot_tv_author)
         TextView mTvAuthor;
-        @BindView(R.id.home_hot_tv_comment)
-        TextView mTvComment;
+        @BindView(R.id.home_hot_tv_time)
+        TextView mTvTime;
         @BindView(R.id.home_hot_iv_cover)
         CircleImageView mIvCover;
         View mItemView;
@@ -227,8 +228,8 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mTvCollections.setText(bean.getCollectCount() + "");
             //分享用户
             mTvAuthor.setText(bean.getUserBean().getUsername() + "");
-            //评论数量
-            mTvComment.setText(bean.getCommentCount() + "");
+            //发布时间
+            mTvTime.setText(DateUtil.convertTime(bean.getCreatedAt()));
             if (bean.getImg() == null) {
                 return;
             }
@@ -245,8 +246,8 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvCollections;
         @BindView(R.id.home_hot_normal_tv_author)
         TextView mTvAuthor;
-        @BindView(R.id.home_hot_normal_tv_comment)
-        TextView mTvComment;
+        @BindView(R.id.home_hot_normal_tv_time)
+        TextView mTvTime;
         @BindView(R.id.home_hot_normal_iv_cover)
         CircleImageView mIvCover;
 
@@ -274,8 +275,8 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mTvCollections.setText(bean.getCollectCount() + "");
             //分享用户
             mTvAuthor.setText(bean.getUserBean().getUsername() + "");
-            //评论数量
-            mTvComment.setText(bean.getCommentCount() + "");
+            //发布时间
+            mTvTime.setText(DateUtil.convertTime(bean.getCreatedAt()));
             //博客封面
             if (bean.getImg() == null) {
                 return;

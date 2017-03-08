@@ -189,7 +189,7 @@ public class BlogCommentActivity extends BaseActivity implements CommentListCont
     @Override
     public void showCommentFailed() {
         mLayout.refreshComplete();
-        showFailed("加载评论失败");
+        showFailed("该博客暂无评论,快来添加第一条评论吧");
     }
 
     @Override

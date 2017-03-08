@@ -9,10 +9,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibBean;
@@ -28,14 +30,26 @@ public class LibDetailActivity extends BaseActivity {
     ImageButton mBtnClose;
     @BindView(R.id.lib_detail_tv_title)
     TextView mTvTitle;
-    @BindView(R.id.lib_detail_btn_share)
-    ImageButton mBtnShare;
-    @BindView(R.id.lib_result_iv_loading)
-    ImageView mIvLoading;
     @BindView(R.id.lib_detail_webview)
     WebView mWebview;
-    @BindView(R.id.lib_result_layout)
+    @BindView(R.id.lib_detail_iv_head)
+    CircleImageView mIvHead;
+    @BindView(R.id.blog_detail_tv_name)
+    TextView mTvName;
+    @BindView(R.id.blog_detail_btn_share)
+    ImageButton mBtnShare;
+    @BindView(R.id.lib_detail_iv_loading)
+    ImageView mIvLoading;
+    @BindView(R.id.blog_detail_layout)
     PtrFrameLayout mLayout;
+    @BindView(R.id.lib_detail_btn_collect)
+    CheckBox mBtnCollect;
+    @BindView(R.id.lib_detail_tv_collect)
+    TextView mTvCollect;
+    @BindView(R.id.lib_detail_btn_comment)
+    ImageButton mBtnComment;
+    @BindView(R.id.lib_detail_tv_comment)
+    TextView mTvComment;
     private LibBean mLibBean;
     private boolean isRefreshing = false;
 
@@ -88,7 +102,7 @@ public class LibDetailActivity extends BaseActivity {
             }
         });
         mLayout.setOffsetToRefresh(100);
-        mLayout.autoRefresh();
+        mLayout.autoRefresh(true);
         //返回按钮
         mBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,8 +140,8 @@ public class LibDetailActivity extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
                 mLayout.refreshComplete();
+                super.onPageFinished(view, url);
             }
         });
         mWebview.loadUrl(mLibBean.getUrl());
