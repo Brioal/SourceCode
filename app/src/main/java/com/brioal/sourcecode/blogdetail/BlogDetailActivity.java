@@ -21,7 +21,7 @@ import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.blogdetail.contract.BlogDetailContract;
 import com.brioal.sourcecode.blogdetail.presenter.BlogDetailPresenterImpl;
-import com.brioal.sourcecode.commentlist.BlogCommentActivity;
+import com.brioal.sourcecode.blogcommentlist.BlogCommentActivity;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;

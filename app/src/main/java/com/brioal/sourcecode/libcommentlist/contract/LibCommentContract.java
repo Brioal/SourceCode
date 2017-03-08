@@ -1,8 +1,8 @@
-package com.brioal.sourcecode.commentlist.contract;
+package com.brioal.sourcecode.libcommentlist.contract;
 
-import com.brioal.sourcecode.bean.BlogBean;
-import com.brioal.sourcecode.bean.BlogCommentBean;
-import com.brioal.sourcecode.interfaces.OnLoadCommentListener;
+import com.brioal.sourcecode.bean.LibBean;
+import com.brioal.sourcecode.bean.LibCommentBean;
+import com.brioal.sourcecode.interfaces.OnLibCommentListener;
 import com.brioal.sourcecode.interfaces.OnNormalOperatorListener;
 
 import java.util.List;
@@ -14,11 +14,12 @@ import java.util.List;
  * Created by Brioal on 2017/3/7.
  */
 
-public class CommentListContract {
+public class LibCommentContract {
+
     public interface View {
         void showLoading();//显示正在加载
 
-        void showComment(List<BlogCommentBean> list);//显示评论列表
+        void showComment(List<LibCommentBean> list);//显示评论列表
 
         void showCommentFailed();//加载评论列表失败
 
@@ -34,7 +35,7 @@ public class CommentListContract {
 
         void showDeletingFailed(String errorMsg);//显示删除失败
 
-        BlogBean getBlogBean();//返回博客实体类
+        LibBean getLibBean();//返回博客实体类
 
     }
 
@@ -43,20 +44,20 @@ public class CommentListContract {
 
         void refresh();//刷新
 
-        void addComment(BlogCommentBean bean);//添加评论
+        void addComment(LibCommentBean bean);//添加评论
 
-        void deleteComment(BlogCommentBean bean);//删除评论
+        void deleteComment(LibCommentBean bean);//删除评论
     }
 
     public interface Model {
         //加载评论
-        void loadComment(BlogBean bean, OnLoadCommentListener listener);
+        void loadComment(LibBean bean, OnLibCommentListener listener);
 
         //添加评论
-        void addComment(BlogCommentBean bean, OnNormalOperatorListener listener);
+        void addComment(LibCommentBean bean, OnNormalOperatorListener listener);
 
         //删除评论
-        void deleteComment(BlogCommentBean bean, OnNormalOperatorListener listener);
+        void deleteComment(LibCommentBean bean, OnNormalOperatorListener listener);
     }
 
 

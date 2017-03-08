@@ -18,7 +18,7 @@ public class LibDetailContract {
 
         void showCommentCount(int commentCount);//显示评论数量
 
-        LibBean getBlogBean();//返回博客实体类
+        LibBean getLibBean();//返回博客实体类
     }
 
     public interface Presenter {

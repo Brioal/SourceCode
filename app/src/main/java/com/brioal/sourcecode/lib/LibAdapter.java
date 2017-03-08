@@ -11,6 +11,7 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.LibBean;
+import com.brioal.sourcecode.libdetail.LibDetailActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

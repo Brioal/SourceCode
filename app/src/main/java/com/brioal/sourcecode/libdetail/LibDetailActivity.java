@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.lib;
+package com.brioal.sourcecode.libdetail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,18 +18,21 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibBean;
+import com.brioal.sourcecode.bean.UserBean;
+import com.brioal.sourcecode.libdetail.contract.LibDetailContract;
+import com.brioal.sourcecode.libdetail.presenter.LibDetailPresenterImpl;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
-public class LibDetailActivity extends BaseActivity {
+public class LibDetailActivity extends BaseActivity implements LibDetailContract.View {
     @BindView(R.id.lib_detail_btn_close)
     ImageButton mBtnClose;
-    @BindView(R.id.lib_detail_tv_title)
-    TextView mTvTitle;
     @BindView(R.id.lib_detail_webview)
     WebView mWebview;
     @BindView(R.id.lib_detail_iv_head)
@@ -53,6 +56,8 @@ public class LibDetailActivity extends BaseActivity {
     private LibBean mLibBean;
     private boolean isRefreshing = false;
 
+    private LibDetailContract.Presenter mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,12 @@ public class LibDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         initData();
         initView();
+        initPresenter();
+    }
+
+    private void initPresenter() {
+        mPresenter = new LibDetailPresenterImpl(this);
+        mPresenter.start();
     }
 
     private void initView() {
@@ -113,8 +124,36 @@ public class LibDetailActivity extends BaseActivity {
         if (mLibBean == null) {
             return;
         }
-        //标题显示
-        mTvTitle.setText(mLibBean.getTitle());
+        if (mLibBean.getUserBean() != null) {
+            //头像显示
+            Glide.with(mContext).load(mLibBean.getUserBean().getHead().getFileUrl()).into(mIvHead);
+            //用户名显示
+            mTvName.setText(mLibBean.getUserBean().getUsername());
+        }
+        //点击收藏
+        mBtnCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (BmobUser.getCurrentUser(UserBean.class) == null) {
+                    showFailed("登陆之后才能进行收藏操作,请前往个人中心登陆后重试");
+                    return;
+                }
+                mPresenter.collect(mBtnCollect.isChecked());
+            }
+        });
+        //跳转评论列表
+        mBtnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2017/3/8 跳转评论列表
+            }
+        });
+        mTvComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2017/3/8 跳转评论列表
+            }
+        });
         //连接分享
         mBtnShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,11 +179,10 @@ public class LibDetailActivity extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                mLayout.refreshComplete();
                 super.onPageFinished(view, url);
+                mLayout.refreshComplete();
             }
         });
-        mWebview.loadUrl(mLibBean.getUrl());
     }
 
     private void initData() {
@@ -155,5 +193,27 @@ public class LibDetailActivity extends BaseActivity {
         Intent intent = new Intent(context, LibDetailActivity.class);
         intent.putExtra("LibBean", libBean);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void showIsCollect(boolean isCollect) {
+        mBtnCollect.setChecked(isCollect);
+    }
+
+    @Override
+    public void showCollectCount(int count) {
+        //显示收藏数量
+        mTvCollect.setText(count + "");
+    }
+
+    @Override
+    public void showCommentCount(int commentCount) {
+        //显示评论数量
+        mTvComment.setText(commentCount + "");
+    }
+
+    @Override
+    public LibBean getLibBean() {
+        return mLibBean;
     }
 }

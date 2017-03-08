@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.commentlist;
+package com.brioal.sourcecode.blogcommentlist;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,8 +22,8 @@ import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.bean.BlogCommentBean;
 import com.brioal.sourcecode.bean.UserBean;
-import com.brioal.sourcecode.commentlist.contract.CommentListContract;
-import com.brioal.sourcecode.commentlist.presenter.CommentListPresenterImpl;
+import com.brioal.sourcecode.blogcommentlist.contract.CommentListContract;
+import com.brioal.sourcecode.blogcommentlist.presenter.CommentListPresenterImpl;
 import com.brioal.sourcecode.interfaces.OnCommentListener;
 import com.brioal.sourcecode.util.CopyUtil;
 

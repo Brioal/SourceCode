@@ -74,7 +74,7 @@
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".lib.LibDetailActivity"
+            android:name=".libdetail.LibDetailActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
         <activity
@@ -82,7 +82,11 @@
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".commentlist.BlogCommentActivity"
+            android:name=".blogcommentlist.BlogCommentActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".libcommentlist.LibCommentActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
     </application>

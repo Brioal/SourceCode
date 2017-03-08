@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.commentlist;
+package com.brioal.sourcecode.blogcommentlist;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
