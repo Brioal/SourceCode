@@ -19,6 +19,7 @@ import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibBean;
 import com.brioal.sourcecode.bean.UserBean;
+import com.brioal.sourcecode.libcommentlist.LibCommentActivity;
 import com.brioal.sourcecode.libdetail.contract.LibDetailContract;
 import com.brioal.sourcecode.libdetail.presenter.LibDetailPresenterImpl;
 import com.bumptech.glide.Glide;
@@ -145,13 +146,13 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
         mBtnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/3/8 跳转评论列表
+                LibCommentActivity.enterLibComment(mContext,mLibBean);
             }
         });
         mTvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/3/8 跳转评论列表
+                LibCommentActivity.enterLibComment(mContext,mLibBean);
             }
         });
         //连接分享
