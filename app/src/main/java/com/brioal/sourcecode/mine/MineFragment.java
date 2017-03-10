@@ -7,6 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brioal.circleimage.CircleImageView;
@@ -16,12 +20,16 @@ import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.login.LoginActivity;
 import com.brioal.sourcecode.mine.contract.MineContract;
 import com.brioal.sourcecode.mine.presenter.MinePresenterImpl;
+import com.brioal.sourcecode.share.ShareListActivity;
 import com.brioal.sourcecode.useredit.UserEditActivity;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 /**
  * Github : https://github.com/Brioal
@@ -49,6 +57,10 @@ public class MineFragment extends BaseFragment implements MineContract.View {
     TextView mTvFans;
     @BindView(R.id.mine_tv_setting)
     TextView mTvSetting;
+    @BindView(R.id.mine_iv_loading)
+    ImageView mIvLoading;
+    @BindView(R.id.mine_layout)
+    PtrFrameLayout mRefreshLayout;
 
     public static MineFragment getInstance() {
         if (sFragment == null) {
@@ -59,6 +71,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
 
     private UserBean mUserBean;
     private MineContract.Presenter mPresenter;
+    private boolean isRefreshing = false;
 
     @Nullable
     @Override
@@ -73,6 +86,49 @@ public class MineFragment extends BaseFragment implements MineContract.View {
         super.onViewCreated(view, savedInstanceState);
         initUser();
         initPresenter();
+        initView();
+    }
+
+    private void initView() {
+        //下拉刷新
+        mRefreshLayout.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                // 默认实现，根据实际情况做改动
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                isRefreshing = true;
+                //刷新显示
+                Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.anim_rotating);
+                animation.setDuration(900);
+                animation.setInterpolator(new AccelerateDecelerateInterpolator());
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        if (isRefreshing) {
+                            mIvLoading.startAnimation(animation);
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                mIvLoading.startAnimation(animation);
+                mPresenter.start();
+            }
+        });
+        mRefreshLayout.setOffsetToRefresh(100);
+        mRefreshLayout.autoRefresh();
     }
 
     private void initPresenter() {
@@ -131,7 +187,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
             mTvShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/28 分享界面
+                    ShareListActivity.enterShareList(mContext);
                 }
             });
             //收藏界面
@@ -187,16 +243,19 @@ public class MineFragment extends BaseFragment implements MineContract.View {
     @Override
     public void showShareCount(int count) {
         mTvShare.setText(count + "");
+        mRefreshLayout.refreshComplete();
     }
 
     @Override
     public void showCollectCount(int count) {
         mTvCollect.setText(count + "");
+        mRefreshLayout.refreshComplete();
     }
 
     @Override
     public void showReadCount(int count) {
         mTvRead.setText(count + "");
+        mRefreshLayout.refreshComplete();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.brioal.sourcecode.libdetail.contract;
 
 import com.brioal.sourcecode.bean.LibBean;
+import com.brioal.sourcecode.bean.LibReadBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.interfaces.OnNormalOperatorListener;
 
@@ -25,6 +26,8 @@ public class LibDetailContract {
         void start();//默认的初始化
 
         void collect(boolean isSelected);//是否收藏
+
+        void addReadRecord(LibReadBean bean);//添加阅读记录
     }
 
     public interface Model {
@@ -40,6 +43,9 @@ public class LibDetailContract {
 
         //删除收藏
         void deleteCollect(UserBean userBean, LibBean blogBean, OnNormalOperatorListener listener);
+
+        //添加阅读记录
+        void addReadRecord(LibReadBean readBean, OnNormalOperatorListener listener);
 
     }
 

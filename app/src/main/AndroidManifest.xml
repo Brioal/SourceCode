@@ -89,6 +89,10 @@
             android:name=".libcommentlist.LibCommentActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".share.ShareListActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

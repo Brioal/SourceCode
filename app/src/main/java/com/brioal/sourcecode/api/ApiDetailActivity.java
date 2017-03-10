@@ -135,7 +135,6 @@ public class ApiDetailActivity extends BaseActivity {
                 mLayout.refreshComplete();
             }
         });
-        mWebview.loadUrl(mApiBean.getUrl());
     }
 
     public static void enterApiDetail(Context context, ApiBean apiBean) {

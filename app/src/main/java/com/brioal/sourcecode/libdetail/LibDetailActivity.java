@@ -18,6 +18,7 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibBean;
+import com.brioal.sourcecode.bean.LibReadBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.libcommentlist.LibCommentActivity;
 import com.brioal.sourcecode.libdetail.contract.LibDetailContract;
@@ -68,6 +69,22 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
         initData();
         initView();
         initPresenter();
+        initRecord();
+    }
+
+    private void initRecord() {
+        UserBean userBean = BmobUser.getCurrentUser(UserBean.class);
+        if (userBean == null) {
+            return;
+        }
+        if (mLibBean == null) {
+            return;
+        }
+        LibReadBean bean = new LibReadBean();
+        bean.setUserBean(userBean);
+        bean.setLibBean(mLibBean);
+        bean.setTime(System.currentTimeMillis());
+        mPresenter.addReadRecord(bean);
     }
 
     private void initPresenter() {
@@ -146,13 +163,13 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
         mBtnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LibCommentActivity.enterLibComment(mContext,mLibBean);
+                LibCommentActivity.enterLibComment(mContext, mLibBean);
             }
         });
         mTvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LibCommentActivity.enterLibComment(mContext,mLibBean);
+                LibCommentActivity.enterLibComment(mContext, mLibBean);
             }
         });
         //连接分享
