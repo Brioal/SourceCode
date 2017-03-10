@@ -18,6 +18,7 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.BlogBean;
+import com.brioal.sourcecode.bean.BlogReadBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.blogdetail.contract.BlogDetailContract;
 import com.brioal.sourcecode.blogdetail.presenter.BlogDetailPresenterImpl;
@@ -68,6 +69,21 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         initData();
         initView();
         initPresenter();
+        addReadRecord();
+    }
+
+    //添加博客阅读数量
+    private void addReadRecord() {
+        UserBean userBean = BmobUser.getCurrentUser(UserBean.class);
+        if (userBean == null) {
+            return;
+        }
+        if (mBlogBean == null) {
+            return;
+        }
+        BlogReadBean readBean = new BlogReadBean();
+        readBean.setBlogBean(mBlogBean).setUserBean(userBean).setTime(System.currentTimeMillis());
+        mPresenter.addReadRecord(readBean);
     }
 
     private void initData() {

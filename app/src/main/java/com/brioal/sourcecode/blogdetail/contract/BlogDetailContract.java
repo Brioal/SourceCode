@@ -1,6 +1,7 @@
 package com.brioal.sourcecode.blogdetail.contract;
 
 import com.brioal.sourcecode.bean.BlogBean;
+import com.brioal.sourcecode.bean.BlogReadBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.interfaces.OnNormalOperatorListener;
 
@@ -26,6 +27,7 @@ public class BlogDetailContract {
 
         void collect(boolean isSelected);//是否收藏
 
+        void addReadRecord(BlogReadBean readBean);//添加博客阅读记录
     }
 
     public interface Model {
@@ -33,14 +35,17 @@ public class BlogDetailContract {
 
         void loadCollectCount(BlogBean bean, OnNormalOperatorListener listener);//加载收藏的数量
 
-        void loadCommentCount(BlogBean bean, OnNormalOperatorListener listener);
         //加载评论的数量
+        void loadCommentCount(BlogBean bean, OnNormalOperatorListener listener);
 
         //添加收藏
         void addCollect(UserBean userBean, BlogBean blogBean, OnNormalOperatorListener listener);
 
         //删除收藏
         void deleteCollect(UserBean userBean, BlogBean blogBean, OnNormalOperatorListener listener);
+
+        //添加博客阅读实体类
+        void addBlogRead(BlogReadBean readBean, OnNormalOperatorListener listener);
 
     }
 

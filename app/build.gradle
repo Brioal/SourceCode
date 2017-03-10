@@ -35,8 +35,6 @@ dependencies {
     //Glide
     compile 'com.muddzdev:styleabletoast:1.0.6'
     compile 'com.github.Brioal:Label-master:1.4'
-    compile 'com.muddzdev:styleabletoast:1.0.6'
-    compile 'com.github.Brioal:Label-master:1.4'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:support-vector-drawable:25.2.0'

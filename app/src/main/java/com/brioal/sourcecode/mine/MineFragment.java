@@ -14,6 +14,8 @@ import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseFragment;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.login.LoginActivity;
+import com.brioal.sourcecode.mine.contract.MineContract;
+import com.brioal.sourcecode.mine.presenter.MinePresenterImpl;
 import com.brioal.sourcecode.useredit.UserEditActivity;
 import com.bumptech.glide.Glide;
 
@@ -27,7 +29,7 @@ import cn.bmob.v3.BmobUser;
  * Created by Brioal on 2017/2/24.
  */
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment implements MineContract.View {
     private static MineFragment sFragment;
     @BindView(R.id.mine_tv_name)
     TextView mTvName;
@@ -56,6 +58,7 @@ public class MineFragment extends BaseFragment {
     }
 
     private UserBean mUserBean;
+    private MineContract.Presenter mPresenter;
 
     @Nullable
     @Override
@@ -69,6 +72,12 @@ public class MineFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUser();
+        initPresenter();
+    }
+
+    private void initPresenter() {
+        mPresenter = new MinePresenterImpl(this);
+        mPresenter.start();
     }
 
     private void initUser() {
@@ -173,5 +182,25 @@ public class MineFragment extends BaseFragment {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
             initUser();
         }
+    }
+
+    @Override
+    public void showShareCount(int count) {
+        mTvShare.setText(count + "");
+    }
+
+    @Override
+    public void showCollectCount(int count) {
+        mTvCollect.setText(count + "");
+    }
+
+    @Override
+    public void showReadCount(int count) {
+        mTvRead.setText(count + "");
+    }
+
+    @Override
+    public UserBean getUserBean() {
+        return mUserBean;
     }
 }
