@@ -1,7 +1,7 @@
 package com.brioal.sourcecode.blogdetail.contract;
 
 import com.brioal.sourcecode.bean.BlogBean;
-import com.brioal.sourcecode.bean.BlogReadBean;
+import com.brioal.sourcecode.bean.ReadBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.interfaces.OnNormalOperatorListener;
 
@@ -27,7 +27,7 @@ public class BlogDetailContract {
 
         void collect(boolean isSelected);//是否收藏
 
-        void addReadRecord(BlogReadBean readBean);//添加博客阅读记录
+        void addReadRecord(ReadBean readBean);//添加博客阅读记录
     }
 
     public interface Model {
@@ -44,8 +44,8 @@ public class BlogDetailContract {
         //删除收藏
         void deleteCollect(UserBean userBean, BlogBean blogBean, OnNormalOperatorListener listener);
 
-        //添加博客阅读实体类
-        void addBlogRead(BlogReadBean readBean, OnNormalOperatorListener listener);
+        //添加阅读实体类
+        void addRead(ReadBean readBean, OnNormalOperatorListener listener);
 
     }
 

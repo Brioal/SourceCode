@@ -53,7 +53,7 @@ public class DateUtil {
 
             return "昨天 " + string.split(" ")[1];
         } else {
-            return string.split(" ")[0];
+            return string.split(" ")[1];
         }
     }
 }

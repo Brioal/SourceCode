@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="com.brioal.sourcecode.useredit.UserEditActivity">
 
@@ -49,7 +51,6 @@
             </RelativeLayout>
             <!--描述-->
             <EditText
-                android:text="用户描述"
                 android:id="@+id/user_edit_et_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,11 +62,11 @@
                 android:drawablePadding="10dp"
                 android:hint="简短的一句话描述一下自己"
                 android:padding="10dp"
+                android:text="用户描述"
                 android:textSize="18sp"/>
             <!--博客地址-->
             <EditText
                 android:id="@+id/user_edit_et_blog"
-                android:text="博客地址"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -76,13 +77,13 @@
                 android:drawablePadding="10dp"
                 android:hint="请输入博客地址"
                 android:padding="10dp"
+                android:text="博客地址"
                 android:textSize="18sp"/>
             <!--职业-->
             <EditText
                 android:id="@+id/user_edit_et_pro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="职业"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
@@ -91,6 +92,7 @@
                 android:drawablePadding="10dp"
                 android:hint="请输入你的职业"
                 android:padding="10dp"
+                android:text="职业"
                 android:textSize="18sp"/>
             <!--公司-->
             <EditText
@@ -98,7 +100,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="公司"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bmob_update_dialog_bg"
@@ -106,6 +107,7 @@
                 android:drawablePadding="10dp"
                 android:hint="请输入你的公司"
                 android:padding="10dp"
+                android:text="公司"
                 android:textSize="18sp"/>
 
             <Button
@@ -118,7 +120,7 @@
                 android:background="@drawable/bmob_update_dialog_bg"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
-                android:text="登陆"
+                android:text="保存修改"
                 android:textColor="@color/colorGreen"
                 android:textSize="18sp"/>
 

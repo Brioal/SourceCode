@@ -11,15 +11,18 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseFragment;
 import com.brioal.sourcecode.bean.UserBean;
+import com.brioal.sourcecode.collect.CollectListActivity;
 import com.brioal.sourcecode.login.LoginActivity;
 import com.brioal.sourcecode.mine.contract.MineContract;
 import com.brioal.sourcecode.mine.presenter.MinePresenterImpl;
+import com.brioal.sourcecode.readhistory.ReadHistoryActivity;
 import com.brioal.sourcecode.share.ShareListActivity;
 import com.brioal.sourcecode.useredit.UserEditActivity;
 import com.bumptech.glide.Glide;
@@ -61,6 +64,18 @@ public class MineFragment extends BaseFragment implements MineContract.View {
     ImageView mIvLoading;
     @BindView(R.id.mine_layout)
     PtrFrameLayout mRefreshLayout;
+    @BindView(R.id.mine_tv_share_title)
+    TextView mTvShareTitle;
+    @BindView(R.id.mine_tv_share_layout)
+    LinearLayout mShareLayout;
+    @BindView(R.id.mine_tv_collect_title)
+    TextView mTvCollectTitle;
+    @BindView(R.id.mine_tv_collect_layout)
+    LinearLayout mCollectLayout;
+    @BindView(R.id.mine_tv_read_title)
+    TextView mTvReadTitle;
+    @BindView(R.id.mine_tv_read_layout)
+    LinearLayout mReadLayout;
 
     public static MineFragment getInstance() {
         if (sFragment == null) {
@@ -184,26 +199,47 @@ public class MineFragment extends BaseFragment implements MineContract.View {
                 }
             });
             //分享界面
-            mTvShare.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener shareClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (mUserBean == null) {
+                        showFailed("登陆之后才能查看分享列表,请登陆后再试");
+                        return;
+                    }
                     ShareListActivity.enterShareList(mContext);
                 }
-            });
+            };
+            mTvShare.setOnClickListener(shareClickListener);
+            mTvShareTitle.setOnClickListener(shareClickListener);
+            mShareLayout.setOnClickListener(shareClickListener);
             //收藏界面
-            mTvCollect.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener collectClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/28 收藏界面
+                    if (mUserBean == null) {
+                        showFailed("登陆之后才能查看分享列表,请登陆后再试");
+                        return;
+                    }
+                    CollectListActivity.enterCollectActivity(mContext);
                 }
-            });
+            };
+            mTvCollect.setOnClickListener(collectClickListener);
+            mTvCollectTitle.setOnClickListener(collectClickListener);
+            mCollectLayout.setOnClickListener(collectClickListener);
             //阅读界面
-            mTvRead.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener readClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: 2017/2/28 阅读界面
+                    if (mUserBean == null) {
+                        showFailed("登陆之后才可查看阅读记录,请先登录后再试");
+                        return;
+                    }
+                    ReadHistoryActivity.enterReadHistory(mContext);
                 }
-            });
+            };
+            mTvRead.setOnClickListener(readClickListener);
+            mTvReadTitle.setOnClickListener(readClickListener);
+            mReadLayout.setOnClickListener(readClickListener);
             //关注界面
             mTvAtten.setOnClickListener(new View.OnClickListener() {
                 @Override

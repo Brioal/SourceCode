@@ -18,7 +18,7 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibBean;
-import com.brioal.sourcecode.bean.LibReadBean;
+import com.brioal.sourcecode.bean.ReadBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.libcommentlist.LibCommentActivity;
 import com.brioal.sourcecode.libdetail.contract.LibDetailContract;
@@ -80,10 +80,8 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
         if (mLibBean == null) {
             return;
         }
-        LibReadBean bean = new LibReadBean();
-        bean.setUserBean(userBean);
-        bean.setLibBean(mLibBean);
-        bean.setTime(System.currentTimeMillis());
+        ReadBean bean = new ReadBean();
+        bean.setUserBean(userBean).setLibBean(mLibBean);
         mPresenter.addReadRecord(bean);
     }
 
@@ -142,7 +140,7 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
         if (mLibBean == null) {
             return;
         }
-        if (mLibBean.getUserBean() != null) {
+        if (mLibBean.getUserBean() != null&&mLibBean.getUserBean().getHead()!=null) {
             //头像显示
             Glide.with(mContext).load(mLibBean.getUserBean().getHead().getFileUrl()).into(mIvHead);
             //用户名显示

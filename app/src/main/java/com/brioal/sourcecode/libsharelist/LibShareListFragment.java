@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.blogsharelist;
+package com.brioal.sourcecode.libsharelist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,10 +14,10 @@ import android.widget.ImageView;
 
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseFragment;
-import com.brioal.sourcecode.bean.BlogBean;
+import com.brioal.sourcecode.bean.LibBean;
 import com.brioal.sourcecode.bean.UserBean;
-import com.brioal.sourcecode.blogsharelist.contract.BlogShareContract;
-import com.brioal.sourcecode.blogsharelist.presenter.BlogSharePresenterImpl;
+import com.brioal.sourcecode.libsharelist.contract.LibShareListContract;
+import com.brioal.sourcecode.libsharelist.presenter.LibShareListPresenterImpl;
 
 import java.util.List;
 
@@ -34,29 +34,29 @@ import in.srain.cube.views.ptr.PtrHandler;
  * Created by Brioal on 2017/3/10.
  */
 
-public class BlogShareListFragment extends BaseFragment implements BlogShareContract.View {
-    private static BlogShareListFragment sFragment;
-    @BindView(R.id.share_blog_iv_loading)
+public class LibShareListFragment extends BaseFragment implements LibShareListContract.View {
+    private static LibShareListFragment sFragment;
+    @BindView(R.id.share_lib_iv_loading)
     ImageView mIvLoading;
-    @BindView(R.id.share_blog_recyclerView)
+    @BindView(R.id.share_lib_recyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.share_blog_refresh_layout)
+    @BindView(R.id.share_lib_refresh_layout)
     PtrFrameLayout mRefreshLayout;
 
-    public static BlogShareListFragment getInstance() {
+    public static LibShareListFragment getInstance() {
         if (sFragment == null) {
-            sFragment = new BlogShareListFragment();
+            sFragment = new LibShareListFragment();
         }
         return sFragment;
     }
 
+    private LibShareListContract.Presenter mPresenter;
     private boolean isRefreshing = false;
-    private BlogShareContract.Presenter mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fra_share_blog, container, false);
+        View view = inflater.inflate(R.layout.fra_share_lib, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -66,12 +66,6 @@ public class BlogShareListFragment extends BaseFragment implements BlogShareCont
         super.onViewCreated(view, savedInstanceState);
         initPresenter();
         initView();
-
-    }
-
-    private void initPresenter() {
-        mPresenter = new BlogSharePresenterImpl(this);
-        mPresenter.start();
     }
 
     private void initView() {
@@ -116,23 +110,29 @@ public class BlogShareListFragment extends BaseFragment implements BlogShareCont
         mRefreshLayout.autoRefresh();
     }
 
+    private void initPresenter() {
+        mPresenter = new LibShareListPresenterImpl(this);
+        mPresenter.start();
+    }
+
     @Override
-    public void showList(List<BlogBean> list) {
+    public void showList(List<LibBean> list) {
         mRefreshLayout.refreshComplete();
-        BlogShareAdapter adapter = new BlogShareAdapter(mContext);
+        LibShareAdapter adapter = new LibShareAdapter(mContext);
         adapter.showList(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void showLoadFailed(String errorMsg) {
+    public void showListFailed(String errorMsg) {
         mRefreshLayout.refreshComplete();
         showFailed(errorMsg);
     }
 
     @Override
     public UserBean getUserBean() {
-        return BmobUser.getCurrentUser(UserBean.class);
+        UserBean userBean = BmobUser.getCurrentUser(UserBean.class);
+        return userBean;
     }
 }

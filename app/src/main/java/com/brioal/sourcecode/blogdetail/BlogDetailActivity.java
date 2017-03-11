@@ -18,11 +18,11 @@ import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.BlogBean;
-import com.brioal.sourcecode.bean.BlogReadBean;
+import com.brioal.sourcecode.bean.ReadBean;
 import com.brioal.sourcecode.bean.UserBean;
+import com.brioal.sourcecode.blogcommentlist.BlogCommentActivity;
 import com.brioal.sourcecode.blogdetail.contract.BlogDetailContract;
 import com.brioal.sourcecode.blogdetail.presenter.BlogDetailPresenterImpl;
-import com.brioal.sourcecode.blogcommentlist.BlogCommentActivity;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -81,8 +81,8 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         if (mBlogBean == null) {
             return;
         }
-        BlogReadBean readBean = new BlogReadBean();
-        readBean.setBlogBean(mBlogBean).setUserBean(userBean).setTime(System.currentTimeMillis());
+        ReadBean readBean = new ReadBean();
+        readBean.setBlogBean(mBlogBean).setUserBean(userBean);
         mPresenter.addReadRecord(readBean);
     }
 
@@ -178,6 +178,7 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         if (mBlogBean == null) {
             return;
         }
+
         //头像
         Glide.with(mContext).load(mBlogBean.getUserBean().getHead().getFileUrl()).into(mIvHead);
         //用户名

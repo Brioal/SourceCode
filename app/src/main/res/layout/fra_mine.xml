@@ -85,15 +85,24 @@
                     android:background="@android:color/white"
                     />
                 <!--用户头像-->
-                <com.brioal.circleimage.CircleImageView
-                    android:id="@+id/mine_iv_head"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentTop="true"
+                <RelativeLayout
+                    android:layout_width="105dp"
+                    android:layout_height="105dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:background="@drawable/mine_head_bg">
+
+                    <com.brioal.circleimage.CircleImageView
+                        android:id="@+id/mine_iv_head"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:padding="1dp"
+                        android:src="@mipmap/ic_launcher"/>
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -110,6 +119,7 @@
                         android:orientation="horizontal">
                         <!--分享-->
                         <LinearLayout
+                            android:id="@+id/mine_tv_share_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -127,6 +137,7 @@
                                 android:textSize="25sp"/>
 
                             <TextView
+                                android:id="@+id/mine_tv_share_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -136,6 +147,7 @@
                         </LinearLayout>
                         <!--收藏-->
                         <LinearLayout
+                            android:id="@+id/mine_tv_collect_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -153,6 +165,7 @@
                                 android:textSize="25sp"/>
 
                             <TextView
+                                android:id="@+id/mine_tv_collect_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -162,6 +175,7 @@
                         </LinearLayout>
                         <!--阅读-->
                         <LinearLayout
+                            android:id="@+id/mine_tv_read_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -179,6 +193,7 @@
                                 android:textSize="25sp"/>
 
                             <TextView
+                                android:id="@+id/mine_tv_read_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
