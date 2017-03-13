@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.libcollectlist.contract;
+package com.brioal.sourcecode.libcollect.contract;
 
 import com.brioal.sourcecode.bean.LibCollectBean;
 import com.brioal.sourcecode.bean.UserBean;

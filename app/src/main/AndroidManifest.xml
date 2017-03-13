@@ -90,15 +90,23 @@
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".share.ShareListActivity"
-            android:theme="@style/CodeTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".collect.CollectListActivity"
-            android:theme="@style/CodeTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".readhistory.ReadHistoryActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".blogsharelist.BlogShareListActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".libsharelist.LibShareListActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".blogcollectlist.BlogCollectActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".libcollect.LibCollectActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
     </application>

@@ -1,23 +1,23 @@
-package com.brioal.sourcecode.libcollectlist;
+package com.brioal.sourcecode.libcollect;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.brioal.sourcecode.R;
-import com.brioal.sourcecode.base.BaseFragment;
+import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.LibCollectBean;
 import com.brioal.sourcecode.bean.UserBean;
-import com.brioal.sourcecode.libcollectlist.contract.LibCollectListContract;
-import com.brioal.sourcecode.libcollectlist.presenter.LibCollectListPresenterImpl;
+import com.brioal.sourcecode.libcollect.contract.LibCollectListContract;
+import com.brioal.sourcecode.libcollect.presenter.LibCollectListPresenterImpl;
 
 import java.util.List;
 
@@ -28,47 +28,38 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
-/**
- * Github : https://github.com/Brioal
- * Email : brioal@foxmial.com
- * Created by Brioal on 2017/3/11.
- */
+public class LibCollectActivity extends BaseActivity implements LibCollectListContract.View {
 
-public class LibCollectFragment extends BaseFragment implements LibCollectListContract.View {
-    private static LibCollectFragment sFragment;
     @BindView(R.id.collect_lib_iv_loading)
     ImageView mIvLoading;
     @BindView(R.id.collect_lib_recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.collect_lib_refresh_layout)
     PtrFrameLayout mRefreshLayout;
-
-    public static LibCollectFragment getInstance() {
-        if (sFragment == null) {
-            sFragment = new LibCollectFragment();
-        }
-        return sFragment;
-    }
-
-    private boolean isRefreshing = false;
-    private LibCollectListContract.Presenter mPresenter;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fra_collect_lib, container, false);
-        ButterKnife.bind(this, view);
-        return view;
-    }
+    @BindView(R.id.collect_lib_btn_close)
+    ImageButton mBtnClose;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_lib_collect);
+        ButterKnife.bind(this);
         initPresenter();
         initView();
     }
 
+
+    private boolean isRefreshing = false;
+    private LibCollectListContract.Presenter mPresenter;
+
     private void initView() {
+        //关闭事件
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //下拉刷新
         mRefreshLayout.setPtrHandler(new PtrHandler() {
             @Override
@@ -133,5 +124,10 @@ public class LibCollectFragment extends BaseFragment implements LibCollectListCo
     @Override
     public UserBean getUserBean() {
         return BmobUser.getCurrentUser(UserBean.class);
+    }
+
+    public static void enterLibCollect(Context context) {
+        Intent intent = new Intent(context, LibCollectActivity.class);
+        context.startActivity(intent);
     }
 }

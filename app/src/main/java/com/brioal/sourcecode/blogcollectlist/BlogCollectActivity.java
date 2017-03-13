@@ -1,19 +1,19 @@
 package com.brioal.sourcecode.blogcollectlist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.brioal.sourcecode.R;
-import com.brioal.sourcecode.base.BaseFragment;
+import com.brioal.sourcecode.base.BaseActivity;
 import com.brioal.sourcecode.bean.BlogCollectionBean;
 import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.blogcollectlist.contract.BlogCollectContract;
@@ -28,47 +28,36 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
-/**
- * Github : https://github.com/Brioal
- * Email : brioal@foxmial.com
- * Created by Brioal on 2017/3/11.
- */
-
-public class BlogCollectListFragment extends BaseFragment implements BlogCollectContract.View {
-    private static BlogCollectListFragment sFragment;
+public class BlogCollectActivity extends BaseActivity implements BlogCollectContract.View {
     @BindView(R.id.collect_blog_iv_loading)
     ImageView mIvLoading;
     @BindView(R.id.collect_blog_recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.collect_blog_refresh_layout)
     PtrFrameLayout mRefreshLayout;
-
-    public static BlogCollectListFragment getInstance() {
-        if (sFragment == null) {
-            sFragment = new BlogCollectListFragment();
-        }
-        return sFragment;
-    }
+    @BindView(R.id.collect_blog_btn_close)
+    ImageButton mBtnClose;
 
     private boolean isRefreshing = false;
     private BlogCollectContract.Presenter mPresenter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fra_collect_blog, container, false);
-        ButterKnife.bind(this, view);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_blog_collect);
+        ButterKnife.bind(this);
         initPresenter();
         initView();
     }
 
     private void initView() {
+        //关闭事件
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //下拉刷新
         mRefreshLayout.setPtrHandler(new PtrHandler() {
             @Override
@@ -133,5 +122,10 @@ public class BlogCollectListFragment extends BaseFragment implements BlogCollect
     @Override
     public UserBean getUserBean() {
         return BmobUser.getCurrentUser(UserBean.class);
+    }
+
+    public static void enterBlogCollect(Context context) {
+        Intent intent = new Intent(context, BlogCollectActivity.class);
+        context.startActivity(intent);
     }
 }

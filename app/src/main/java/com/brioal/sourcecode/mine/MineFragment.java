@@ -11,19 +11,20 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brioal.circleimage.CircleImageView;
 import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseFragment;
 import com.brioal.sourcecode.bean.UserBean;
-import com.brioal.sourcecode.collect.CollectListActivity;
+import com.brioal.sourcecode.blogcollectlist.BlogCollectActivity;
+import com.brioal.sourcecode.blogsharelist.BlogShareListActivity;
+import com.brioal.sourcecode.libcollect.LibCollectActivity;
+import com.brioal.sourcecode.libsharelist.LibShareListActivity;
 import com.brioal.sourcecode.login.LoginActivity;
 import com.brioal.sourcecode.mine.contract.MineContract;
 import com.brioal.sourcecode.mine.presenter.MinePresenterImpl;
 import com.brioal.sourcecode.readhistory.ReadHistoryActivity;
-import com.brioal.sourcecode.share.ShareListActivity;
 import com.brioal.sourcecode.useredit.UserEditActivity;
 import com.bumptech.glide.Glide;
 
@@ -48,34 +49,32 @@ public class MineFragment extends BaseFragment implements MineContract.View {
     TextView mTvDesc;
     @BindView(R.id.mine_iv_head)
     CircleImageView mIvHead;
-    @BindView(R.id.mine_tv_share)
-    TextView mTvShare;
-    @BindView(R.id.mine_tv_collect)
-    TextView mTvCollect;
-    @BindView(R.id.mine_tv_read)
-    TextView mTvRead;
-    @BindView(R.id.mine_tv_atten)
-    TextView mTvAtten;
-    @BindView(R.id.mine_tv_fans)
-    TextView mTvFans;
     @BindView(R.id.mine_tv_setting)
     TextView mTvSetting;
     @BindView(R.id.mine_iv_loading)
     ImageView mIvLoading;
     @BindView(R.id.mine_layout)
     PtrFrameLayout mRefreshLayout;
-    @BindView(R.id.mine_tv_share_title)
-    TextView mTvShareTitle;
-    @BindView(R.id.mine_tv_share_layout)
-    LinearLayout mShareLayout;
-    @BindView(R.id.mine_tv_collect_title)
-    TextView mTvCollectTitle;
-    @BindView(R.id.mine_tv_collect_layout)
-    LinearLayout mCollectLayout;
-    @BindView(R.id.mine_tv_read_title)
-    TextView mTvReadTitle;
-    @BindView(R.id.mine_tv_read_layout)
-    LinearLayout mReadLayout;
+    @BindView(R.id.mine_layout_share_blog)
+    TextView mShareBlog;
+    @BindView(R.id.mine_layout_share_blog_count)
+    TextView mShareBlogCount;
+    @BindView(R.id.mine_layout_share_lib)
+    TextView mShareLib;
+    @BindView(R.id.mine_layout_share_lib_count)
+    TextView mShareLibCount;
+    @BindView(R.id.mine_layout_collect_blog)
+    TextView mCollectBlog;
+    @BindView(R.id.mine_layout_collect_blog_count)
+    TextView mCollectBlogCount;
+    @BindView(R.id.mine_layout_collect_lib)
+    TextView mCollectLib;
+    @BindView(R.id.mine_layout_collect_lib_count)
+    TextView mCollectLibCount;
+    @BindView(R.id.mine_layout_read)
+    TextView mRead;
+    @BindView(R.id.mine_layout_read_count)
+    TextView mReadCount;
 
     public static MineFragment getInstance() {
         if (sFragment == null) {
@@ -158,20 +157,27 @@ public class MineFragment extends BaseFragment implements MineContract.View {
             mTvName.setText("点击头像登陆");
             mTvDesc.setText("点击头像登陆");
             Glide.with(mContext).load(R.mipmap.ic_launcher).into(mIvHead);
-            mTvShare.setText("0");
-            mTvCollect.setText("0");
-            mTvRead.setText("0");
+            mShareBlogCount.setText("0");
+            mShareLibCount.setText("0");
+            mCollectLibCount.setText("0");
+            mCollectLibCount.setText("0");
+            mReadCount.setText("0");
             View.OnClickListener clickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showFailed("当前未登录,请点击头像登陆");
                 }
             };
-            mTvAtten.setOnClickListener(clickListener);
-            mTvFans.setOnClickListener(clickListener);
-            mTvShare.setOnClickListener(clickListener);
-            mTvCollect.setOnClickListener(clickListener);
-            mTvRead.setOnClickListener(clickListener);
+            mShareBlog.setOnClickListener(clickListener);
+            mShareBlogCount.setOnClickListener(clickListener);
+            mShareLib.setOnClickListener(clickListener);
+            mShareLibCount.setOnClickListener(clickListener);
+            mCollectBlog.setOnClickListener(clickListener);
+            mCollectBlogCount.setOnClickListener(clickListener);
+            mCollectLib.setOnClickListener(clickListener);
+            mCollectLibCount.setOnClickListener(clickListener);
+            mRead.setOnClickListener(clickListener);
+            mReadCount.setOnClickListener(clickListener);
             //点击登陆
             mIvHead.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -186,9 +192,11 @@ public class MineFragment extends BaseFragment implements MineContract.View {
             if (mUserBean.getHead() != null) {
                 Glide.with(mContext).load(mUserBean.getHead().getFileUrl()).into(mIvHead);
             }
-            mTvShare.setText("0");
-            mTvCollect.setText("0");
-            mTvRead.setText("0");
+            mShareBlogCount.setText("0");
+            mShareLibCount.setText("0");
+            mCollectLibCount.setText("0");
+            mCollectLibCount.setText("0");
+            mReadCount.setText("0");
             //个人信息设置界面
             mIvHead.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -198,7 +206,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
                     startActivityForResult(intent, 0);
                 }
             });
-            //分享界面
+            //博客分享界面
             View.OnClickListener shareClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -206,54 +214,63 @@ public class MineFragment extends BaseFragment implements MineContract.View {
                         showFailed("登陆之后才能查看分享列表,请登陆后再试");
                         return;
                     }
-                    ShareListActivity.enterShareList(mContext);
+                    BlogShareListActivity.enterBlogShare(mContext);
                 }
             };
-            mTvShare.setOnClickListener(shareClickListener);
-            mTvShareTitle.setOnClickListener(shareClickListener);
-            mShareLayout.setOnClickListener(shareClickListener);
-            //收藏界面
-            View.OnClickListener collectClickListener = new View.OnClickListener() {
+            mShareBlog.setOnClickListener(shareClickListener);
+            mShareBlogCount.setOnClickListener(shareClickListener);
+            //开源库分享界面
+            View.OnClickListener libShareClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mUserBean == null) {
                         showFailed("登陆之后才能查看分享列表,请登陆后再试");
                         return;
                     }
-                    CollectListActivity.enterCollectActivity(mContext);
+                    LibShareListActivity.enterLibShareList(mContext);
                 }
             };
-            mTvCollect.setOnClickListener(collectClickListener);
-            mTvCollectTitle.setOnClickListener(collectClickListener);
-            mCollectLayout.setOnClickListener(collectClickListener);
-            //阅读界面
+            mShareLib.setOnClickListener(libShareClickListener);
+            mShareLibCount.setOnClickListener(libShareClickListener);
+            //博客收藏界面
+            View.OnClickListener blogCollectListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mUserBean == null) {
+                        showFailed("登陆之后才能查看分享列表,请登陆后再试");
+                        return;
+                    }
+                    BlogCollectActivity.enterBlogCollect(mContext);
+                }
+            };
+            mCollectBlog.setOnClickListener(blogCollectListener);
+            mCollectBlogCount.setOnClickListener(blogCollectListener);
+            //开源库收藏界面
+            View.OnClickListener libCollectListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mUserBean == null) {
+                        showFailed("登陆之后才能查看分享列表,请登陆后再试");
+                        return;
+                    }
+                    LibCollectActivity.enterLibCollect(mContext);
+                }
+            };
+            mCollectLib.setOnClickListener(libCollectListener);
+            mCollectLibCount.setOnClickListener(libCollectListener);
+            //阅读记录界面
             View.OnClickListener readClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mUserBean == null) {
-                        showFailed("登陆之后才可查看阅读记录,请先登录后再试");
+                        showFailed("登陆之后才能查看分享列表,请登陆后再试");
                         return;
                     }
                     ReadHistoryActivity.enterReadHistory(mContext);
                 }
             };
-            mTvRead.setOnClickListener(readClickListener);
-            mTvReadTitle.setOnClickListener(readClickListener);
-            mReadLayout.setOnClickListener(readClickListener);
-            //关注界面
-            mTvAtten.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: 2017/2/28 关注界面
-                }
-            });
-            //粉丝界面
-            mTvFans.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: 2017/2/28 粉丝界面
-                }
-            });
+            mRead.setOnClickListener(readClickListener);
+            mReadCount.setOnClickListener(readClickListener);
         }
         mTvSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,20 +294,32 @@ public class MineFragment extends BaseFragment implements MineContract.View {
     }
 
     @Override
-    public void showShareCount(int count) {
-        mTvShare.setText(count + "");
+    public void showBlogShareCount(int count) {
+        mShareBlogCount.setText(count + "");
         mRefreshLayout.refreshComplete();
     }
 
     @Override
-    public void showCollectCount(int count) {
-        mTvCollect.setText(count + "");
+    public void showLibShareCount(int count) {
+        mShareLibCount.setText(count + "");
+        mRefreshLayout.refreshComplete();
+    }
+
+    @Override
+    public void showBlogCollectCount(int count) {
+        mCollectBlogCount.setText(count + "");
+        mRefreshLayout.refreshComplete();
+    }
+
+    @Override
+    public void showLibCollectCount(int count) {
+        mCollectLibCount.setText(count + "");
         mRefreshLayout.refreshComplete();
     }
 
     @Override
     public void showReadCount(int count) {
-        mTvRead.setText(count + "");
+        mReadCount.setText(count + "");
         mRefreshLayout.refreshComplete();
     }
 

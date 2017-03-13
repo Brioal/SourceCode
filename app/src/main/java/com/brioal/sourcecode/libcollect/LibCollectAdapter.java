@@ -1,4 +1,4 @@
-package com.brioal.sourcecode.libcollectlist;
+package com.brioal.sourcecode.libcollect;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
