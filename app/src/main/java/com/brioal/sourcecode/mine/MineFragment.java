@@ -49,8 +49,8 @@ public class MineFragment extends BaseFragment implements MineContract.View {
     TextView mTvDesc;
     @BindView(R.id.mine_iv_head)
     CircleImageView mIvHead;
-    @BindView(R.id.mine_tv_setting)
-    TextView mTvSetting;
+//    @BindView(R.id.mine_tv_setting)
+//    TextView mTvSetting;
     @BindView(R.id.mine_iv_loading)
     ImageView mIvLoading;
     @BindView(R.id.mine_layout)
@@ -214,7 +214,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
                         showFailed("登陆之后才能查看分享列表,请登陆后再试");
                         return;
                     }
-                    BlogShareListActivity.enterBlogShare(mContext);
+                    BlogShareListActivity.enterBlogShare(mContext, mUserBean);
                 }
             };
             mShareBlog.setOnClickListener(shareClickListener);
@@ -227,7 +227,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
                         showFailed("登陆之后才能查看分享列表,请登陆后再试");
                         return;
                     }
-                    LibShareListActivity.enterLibShareList(mContext);
+                    LibShareListActivity.enterLibShareList(mContext, mUserBean);
                 }
             };
             mShareLib.setOnClickListener(libShareClickListener);
@@ -253,7 +253,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
                         showFailed("登陆之后才能查看分享列表,请登陆后再试");
                         return;
                     }
-                    LibCollectActivity.enterLibCollect(mContext);
+                    LibCollectActivity.enterLibCollect(mContext, mUserBean);
                 }
             };
             mCollectLib.setOnClickListener(libCollectListener);
@@ -272,12 +272,12 @@ public class MineFragment extends BaseFragment implements MineContract.View {
             mRead.setOnClickListener(readClickListener);
             mReadCount.setOnClickListener(readClickListener);
         }
-        mTvSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2017/2/28 设置界面
-            }
-        });
+//        mTvSetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO: 2017/2/28 设置界面
+//            }
+//        });
     }
 
     private void startLogin() {

@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -30,6 +31,7 @@ import java.io.FileNotFoundException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
 
 public class UserEditActivity extends BaseActivity implements UserEditContract.View {
 
@@ -49,6 +51,8 @@ public class UserEditActivity extends BaseActivity implements UserEditContract.V
     Button mBtnDone;
     @BindView(R.id.user_edit_btn_close)
     ImageButton mBtnClose;
+    @BindView(R.id.user_edit_btn_log_out)
+    Button mBtnLogOut;
 
     private UserBean mUserBean;
     private ProgressDialog mProgressDialog;
@@ -125,6 +129,21 @@ public class UserEditActivity extends BaseActivity implements UserEditContract.V
                 String company = mEtCompany.getText().toString().trim();
                 mUserBean.setDesc(desc).setBlogUrl(blogUrl).setPro(pro).setCompany(company);
                 mPresenter.save(mHeadUrl, mUserBean);
+            }
+        });
+        //注销
+        mBtnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BmobUser.logOut();
+                showSuccess("退出成功,正在跳转");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                }, 2000);
             }
         });
     }

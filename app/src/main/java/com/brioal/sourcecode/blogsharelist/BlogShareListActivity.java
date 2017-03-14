@@ -23,7 +23,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.bmob.v3.BmobUser;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -41,15 +40,20 @@ public class BlogShareListActivity extends BaseActivity implements BlogShareCont
 
     private boolean isRefreshing = false;
     private BlogShareContract.Presenter mPresenter;
+    private UserBean mUserBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
         setContentView(R.layout.act_blog_share_list);
         ButterKnife.bind(this);
         initPresenter();
         initView();
+    }
 
+    private void initData() {
+        mUserBean = (UserBean) getIntent().getSerializableExtra("UserBean");
     }
 
     private void initPresenter() {
@@ -123,12 +127,13 @@ public class BlogShareListActivity extends BaseActivity implements BlogShareCont
 
     @Override
     public UserBean getUserBean() {
-        return BmobUser.getCurrentUser(UserBean.class);
+        return mUserBean;
     }
 
 
-    public static void enterBlogShare(Context context) {
+    public static void enterBlogShare(Context context,UserBean userBean) {
         Intent intent = new Intent(context, BlogShareListActivity.class);
+        intent.putExtra("UserBean", userBean);
         context.startActivity(intent);
     }
 }

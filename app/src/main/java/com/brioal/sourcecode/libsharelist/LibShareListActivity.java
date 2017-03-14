@@ -42,14 +42,20 @@ public class LibShareListActivity extends BaseActivity implements LibShareListCo
 
     private LibShareListContract.Presenter mPresenter;
     private boolean isRefreshing = false;
+    private UserBean mUserBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_lib_share_list);
+        initData();
         ButterKnife.bind(this);
         initPresenter();
         initView();
+    }
+
+    private void initData() {
+        mUserBean = (UserBean) getIntent().getSerializableExtra("UserBean");
     }
 
     private void initView() {
@@ -127,8 +133,9 @@ public class LibShareListActivity extends BaseActivity implements LibShareListCo
         return userBean;
     }
 
-    public static void enterLibShareList(Context context) {
+    public static void enterLibShareList(Context context, UserBean userBean) {
         Intent intent = new Intent(context, LibShareListActivity.class);
+        intent.putExtra("UserBean", userBean);
         context.startActivity(intent);
     }
 }

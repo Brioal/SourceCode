@@ -44,13 +44,19 @@ public class LibCollectActivity extends BaseActivity implements LibCollectListCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_lib_collect);
         ButterKnife.bind(this);
+        initData();
         initPresenter();
         initView();
+    }
+
+    private void initData() {
+        mUserBean = (UserBean) getIntent().getSerializableExtra("UserBean");
     }
 
 
     private boolean isRefreshing = false;
     private LibCollectListContract.Presenter mPresenter;
+    private UserBean mUserBean;
 
     private void initView() {
         //关闭事件
@@ -126,8 +132,9 @@ public class LibCollectActivity extends BaseActivity implements LibCollectListCo
         return BmobUser.getCurrentUser(UserBean.class);
     }
 
-    public static void enterLibCollect(Context context) {
+    public static void enterLibCollect(Context context,UserBean userBean) {
         Intent intent = new Intent(context, LibCollectActivity.class);
+        intent.putExtra("UserBean", userBean);
         context.startActivity(intent);
     }
 }

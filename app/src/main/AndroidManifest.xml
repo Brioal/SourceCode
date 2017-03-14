@@ -109,6 +109,10 @@
             android:name=".libcollect.LibCollectActivity"
             android:theme="@style/CodeTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".userinfo.UserInfoActivity"
+            android:theme="@style/CodeTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

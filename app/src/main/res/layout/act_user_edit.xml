@@ -124,6 +124,20 @@
                 android:textColor="@color/colorGreen"
                 android:textSize="18sp"/>
 
+            <Button
+                android:id="@+id/user_edit_btn_log_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/login_out_bg"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="退出登录"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
             <ImageButton
                 android:id="@+id/user_edit_btn_close"
                 android:layout_width="wrap_content"

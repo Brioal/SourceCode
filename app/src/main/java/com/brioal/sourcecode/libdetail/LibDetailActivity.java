@@ -23,6 +23,7 @@ import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.libcommentlist.LibCommentActivity;
 import com.brioal.sourcecode.libdetail.contract.LibDetailContract;
 import com.brioal.sourcecode.libdetail.presenter.LibDetailPresenterImpl;
+import com.brioal.sourcecode.userinfo.UserInfoActivity;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -155,6 +156,13 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
                     return;
                 }
                 mPresenter.collect(mBtnCollect.isChecked());
+            }
+        });
+        //跳转用户信息
+        mIvHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserInfoActivity.enterUserInfo(mContext, mLibBean.getUserBean());
             }
         });
         //跳转评论列表

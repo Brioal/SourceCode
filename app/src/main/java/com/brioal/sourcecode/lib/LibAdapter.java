@@ -12,6 +12,7 @@ import com.brioal.sourcecode.R;
 import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.LibBean;
 import com.brioal.sourcecode.libdetail.LibDetailActivity;
+import com.brioal.sourcecode.userinfo.UserInfoActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -106,6 +107,13 @@ public class LibAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 @Override
                 public void onClick(View v) {
                     LibDetailActivity.enterLibDetail(mContext, bean);
+                }
+            });
+            //跳转用户信息
+            mIcHead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserInfoActivity.enterUserInfo(mContext, bean.getUserBean());
                 }
             });
         }

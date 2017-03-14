@@ -18,6 +18,7 @@ import com.brioal.sourcecode.base.BaseViewHolder;
 import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.blogdetail.BlogDetailActivity;
 import com.brioal.sourcecode.interfaces.OnHotRefreshListener;
+import com.brioal.sourcecode.userinfo.UserInfoActivity;
 import com.brioal.sourcecode.util.DateUtil;
 import com.bumptech.glide.Glide;
 
@@ -337,6 +338,13 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             mTvType.setText(bean.getTypeBean().getName());
             //用户头像
             Glide.with(mContext).load(bean.getUserBean().getHead().getFileUrl()).into(mIcHead);
+            //跳转用户信息
+            mIcHead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserInfoActivity.enterUserInfo(mContext, bean.getUserBean());
+                }
+            });
         }
     }
 
@@ -395,6 +403,13 @@ public class HomeAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             Glide.with(mContext).load(bean.getUserBean().getHead().getFileUrl()).into(mIvHead);
             //封面
             Glide.with(mContext).load(bean.getImg().getFileUrl()).into(mIvImg);
+            //跳转用户信息
+            mIvHead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserInfoActivity.enterUserInfo(mContext, bean.getUserBean());
+                }
+            });
         }
     }
 }

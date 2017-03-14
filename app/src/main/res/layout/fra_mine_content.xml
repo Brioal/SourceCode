@@ -249,16 +249,16 @@
             android:layout_marginRight="20dp"
             android:background="@android:color/white"/>
         <!--设置-->
-        <TextView
-            android:id="@+id/mine_tv_setting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:drawableRight="@drawable/ic_more"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:text="设置"
-            android:textColor="@android:color/white"
-            android:textSize="22sp"/>
+        <!--<TextView-->
+            <!--android:id="@+id/mine_tv_setting"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:drawableRight="@drawable/ic_more"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:text="设置"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="22sp"/>-->
     </LinearLayout>
 </LinearLayout>

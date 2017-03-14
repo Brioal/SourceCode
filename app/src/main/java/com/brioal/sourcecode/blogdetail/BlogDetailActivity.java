@@ -23,6 +23,7 @@ import com.brioal.sourcecode.bean.UserBean;
 import com.brioal.sourcecode.blogcommentlist.BlogCommentActivity;
 import com.brioal.sourcecode.blogdetail.contract.BlogDetailContract;
 import com.brioal.sourcecode.blogdetail.presenter.BlogDetailPresenterImpl;
+import com.brioal.sourcecode.userinfo.UserInfoActivity;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -178,9 +179,15 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         if (mBlogBean == null) {
             return;
         }
-
         //头像
         Glide.with(mContext).load(mBlogBean.getUserBean().getHead().getFileUrl()).into(mIvHead);
+//跳转用户信息
+        mIvHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserInfoActivity.enterUserInfo(mContext, mBlogBean.getUserBean());
+            }
+        });
         //用户名
         mTvName.setText(mBlogBean.getUserBean().getUsername());
         //加载网页
