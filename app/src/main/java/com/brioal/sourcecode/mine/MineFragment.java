@@ -147,7 +147,6 @@ public class MineFragment extends BaseFragment implements MineContract.View {
 
     private void initPresenter() {
         mPresenter = new MinePresenterImpl(this);
-        mPresenter.start();
     }
 
     private void initUser() {
@@ -290,6 +289,7 @@ public class MineFragment extends BaseFragment implements MineContract.View {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
             initUser();
+            mRefreshLayout.autoRefresh();
         }
     }
 

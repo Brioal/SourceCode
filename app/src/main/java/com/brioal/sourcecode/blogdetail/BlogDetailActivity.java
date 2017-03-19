@@ -191,6 +191,7 @@ public class BlogDetailActivity extends BaseActivity implements BlogDetailContra
         //用户名
         mTvName.setText(mBlogBean.getUserBean().getUsername());
         //加载网页
+        mWebview.getSettings().setJavaScriptEnabled(true);
         mWebview.setWebViewClient(new WebViewClient() {
 
             @Override

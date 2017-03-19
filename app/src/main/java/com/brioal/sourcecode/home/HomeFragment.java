@@ -241,7 +241,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             public void run() {
                 BlogAddActivity.enterBlogAddActivity(mContext, blogBean);
             }
-        }, 1500);
+        }, 1000);
     }
 
     //显示设置Url的dialog

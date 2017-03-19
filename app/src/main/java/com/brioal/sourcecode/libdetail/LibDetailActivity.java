@@ -193,6 +193,7 @@ public class LibDetailActivity extends BaseActivity implements LibDetailContract
             }
         });
         //网页加载
+        mWebview.getSettings().setJavaScriptEnabled(true);
         mWebview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -88,9 +88,9 @@
                         android:textSize="18sp"/>
 
                     <TextView
+                        android:id="@+id/user_info_tv_blog_count"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/user_info_tv_blog_count"
                         android:gravity="center"
                         android:text="0"
                         android:textColor="@android:color/white"
@@ -98,11 +98,11 @@
                 </LinearLayout>
                 <!--开源库-->
                 <LinearLayout
-                    android:gravity="center"
                     android:id="@+id/user_info_tv_lib_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -115,8 +115,8 @@
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:layout_width="match_parent"
                         android:id="@+id/user_info_tv_lib_count"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="0"
@@ -134,7 +134,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bmob_update_dialog_bg"
-                android:drawableLeft="@drawable/ic_mail_black"
+                android:drawableLeft="@drawable/ic_link_black"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="博客地址"
@@ -148,7 +148,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bmob_update_dialog_bg"
-                android:drawableLeft="@drawable/ic_mail_black"
+                android:drawableLeft="@drawable/ic_work_black"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="职业"
@@ -162,7 +162,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bmob_update_dialog_bg"
-                android:drawableLeft="@drawable/ic_mail_black"
+                android:drawableLeft="@drawable/ic_company_black"
                 android:drawablePadding="10dp"
                 android:hint="请输入你的公司"
                 android:padding="10dp"
