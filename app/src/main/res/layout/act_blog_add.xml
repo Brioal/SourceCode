@@ -8,7 +8,7 @@
     android:background="@color/colorLightWhite"
     android:orientation="vertical"
     tools:context="com.brioal.sourcecode.addblog.BlogAddActivity">
-
+    <!--标题栏-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/add_blog_toolBar"
         android:layout_width="match_parent"
@@ -19,6 +19,23 @@
         app:titleTextColor="@android:color/white">
 
     </android.support.v7.widget.Toolbar>
+    <!--标题设置-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:text="编辑标题"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/add_blog_et_title"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:hint="文章标题"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -52,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:src="@mipmap/ic_launcher"/>
 
     <Button

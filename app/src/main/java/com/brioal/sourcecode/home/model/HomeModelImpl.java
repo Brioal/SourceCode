@@ -4,14 +4,13 @@ import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.home.contract.HomeContract;
 import com.brioal.sourcecode.interfaces.OnBlogLoadListener;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
@@ -97,30 +96,11 @@ public class HomeModelImpl implements HomeContract.Model {
             @Override
             public void run() {
                 super.run();
-                InputStreamReader in = null;
                 try {
-                    in = new InputStreamReader(new URL(blogUrl).openStream());
-                    // read contents into string buffer
-                    StringBuilder input = new StringBuilder();
-                    int ch;
-                    while ((ch = in.read()) != -1) input.append((char) ch);
-                    String htmls = input.toString();
-                    String regex;
-                    String title = "";
-                    final List<String> list = new ArrayList<String>();
-                    regex = "<title>.*?</title>";
-                    final Pattern pa = Pattern.compile(regex);
-                    final Matcher ma = pa.matcher(htmls);
-                    while (ma.find()) {
-                        list.add(ma.group());
-                    }
-                    for (int i = 0; i < list.size(); i++) {
-                        title = title + list.get(i);
-                    }
-                    String result = title.replaceAll("<.*?>", "");
+                    Document doc = Jsoup.connect(blogUrl).get();
                     BlogBean blogBean = new BlogBean();
                     blogBean.setUrl(blogUrl);
-                    blogBean.setTitle(result);
+                    blogBean.setTitle(doc.title());
                     List<BlogBean> blogList = new ArrayList<>();
                     blogList.add(blogBean);
                     listener.success(blogList);

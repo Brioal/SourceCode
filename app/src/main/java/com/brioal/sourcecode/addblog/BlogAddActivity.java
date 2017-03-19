@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.brioal.labelview.LabelView;
@@ -49,6 +50,8 @@ public class BlogAddActivity extends BaseActivity implements BlogAddContract.Vie
     ImageView mIvCover;
     @BindView(R.id.add_blog_btn_login)
     Button mBtnLogin;
+    @BindView(R.id.add_blog_et_title)
+    EditText mEtTitle;
     private BlogBean mBlogBean;
     private ProgressDialog mProgressDialog;
     private BlogTypeBean mTypeBean;
@@ -100,12 +103,23 @@ public class BlogAddActivity extends BaseActivity implements BlogAddContract.Vie
                     showFailed("请先选择一个博客类型");
                     return;
                 }
+                String title = mEtTitle.getText().toString();
+                if (title.isEmpty()) {
+                    showFailed("标题不能为空");
+                    return;
+                }
+                mBlogBean.setTitle(title);
                 mBlogBean.setTypeBean(mTypeBean);
                 mBlogBean.setUserBean(BmobUser.getCurrentUser(UserBean.class));
                 mBlogBean.setTime(System.currentTimeMillis());
                 mPresenter.addBlog(mCoverUrl, mBlogBean);
             }
         });
+        if (mBlogBean == null) {
+            return;
+        }
+        mEtTitle.setText(mBlogBean.getTitle());
+
     }
 
     private void initData() {
@@ -150,6 +164,8 @@ public class BlogAddActivity extends BaseActivity implements BlogAddContract.Vie
             entities.add(entity);
         }
         mLabel.setLabels(entities);
+        mLabel.setColorBGNormal(Color.WHITE);
+        mLabel.setColorBGSelect(mContext.getResources().getColor(R.color.colorPrimary));
         mLabel.setListener(new OnLabelSelectedListener() {
             @Override
             public void selected(int i, String s) {
