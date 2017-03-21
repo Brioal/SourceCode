@@ -32,10 +32,12 @@
     <EditText
         android:id="@+id/add_blog_et_title"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:hint="文章标题"/>
+        android:hint="文章标题"
+        android:padding="10dp"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -31,7 +31,8 @@
             android:id="@+id/add_lib_et_url"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorPrimary"
+            android:imeOptions="actionNext"
+            android:textColor="@color/colorText"
             android:textColorHint="@color/colorPrimary"/>
     </android.support.design.widget.TextInputLayout>
     <!--标题-->
@@ -47,7 +48,8 @@
             android:id="@+id/add_lib_et_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorPrimary"
+            android:imeOptions="actionNext"
+            android:textColor="@color/colorText"
             android:textColorHint="@color/colorPrimary"/>
     </android.support.design.widget.TextInputLayout>
     <!--描述-->
@@ -63,7 +65,8 @@
             android:id="@+id/add_lib_et_desc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorPrimary"
+            android:imeOptions="actionNext"
+            android:textColor="@color/colorText"
             android:textColorHint="@color/colorPrimary"/>
     </android.support.design.widget.TextInputLayout>
     <!--标签-->
@@ -79,7 +82,8 @@
             android:id="@+id/add_lib_et_label"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorPrimary"
+            android:imeOptions="actionNext"
+            android:textColor="@color/colorText"
             android:textColorHint="@color/colorPrimary"/>
     </android.support.design.widget.TextInputLayout>
 

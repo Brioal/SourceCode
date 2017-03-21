@@ -80,10 +80,10 @@ public class BlogAddActivity extends BaseActivity implements BlogAddContract.Vie
         //默认的Label
         List<LabelEntity> list = new ArrayList<>();
         list.add(new LabelEntity("...", "..."));
-        mLabel.setColorBGNormal(getResources().getColor(R.color.colorGreen));
-        mLabel.setColorBGSelect(Color.WHITE);
-        mLabel.setColorTextNormal(Color.WHITE);
-        mLabel.setColorTextSelect(getResources().getColor(R.color.colorGreen));
+        mLabel.setColorBGNormal(Color.WHITE);
+        mLabel.setColorBGSelect(getResources().getColor(R.color.colorGreen));
+        mLabel.setColorTextNormal(getResources().getColor(R.color.colorGreen));
+        mLabel.setColorTextSelect(Color.WHITE);
         mLabel.setLabels(list);
         //选择图片
         mIvCover.setOnClickListener(new View.OnClickListener() {

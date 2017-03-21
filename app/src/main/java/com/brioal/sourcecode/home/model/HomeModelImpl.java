@@ -3,7 +3,7 @@ package com.brioal.sourcecode.home.model;
 import com.brioal.sourcecode.bean.BlogBean;
 import com.brioal.sourcecode.home.contract.HomeContract;
 import com.brioal.sourcecode.interfaces.OnBlogLoadListener;
-
+import com.socks.library.KLog;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -101,6 +101,7 @@ public class HomeModelImpl implements HomeContract.Model {
                     BlogBean blogBean = new BlogBean();
                     blogBean.setUrl(blogUrl);
                     blogBean.setTitle(doc.title());
+                    KLog.e("Blog Title:"+doc.title());
                     List<BlogBean> blogList = new ArrayList<>();
                     blogList.add(blogBean);
                     listener.success(blogList);

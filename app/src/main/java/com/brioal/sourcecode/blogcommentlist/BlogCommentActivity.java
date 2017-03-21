@@ -26,6 +26,7 @@ import com.brioal.sourcecode.blogcommentlist.contract.CommentListContract;
 import com.brioal.sourcecode.blogcommentlist.presenter.CommentListPresenterImpl;
 import com.brioal.sourcecode.interfaces.OnCommentListener;
 import com.brioal.sourcecode.util.CopyUtil;
+import com.brioal.sourcecode.util.SoftInputUtil;
 
 import java.util.List;
 
@@ -153,6 +154,8 @@ public class BlogCommentActivity extends BaseActivity implements CommentListCont
                 mEtComment.setHint("输入回复");
                 mParent = null;
                 mPresenter.addComment(bean);
+                //隐藏软键盘
+                SoftInputUtil.hideSoftInput(mContext, mEtComment);
             }
         });
 
@@ -288,4 +291,5 @@ public class BlogCommentActivity extends BaseActivity implements CommentListCont
             }
         }).setCancelable(true).create().show();
     }
+
 }
