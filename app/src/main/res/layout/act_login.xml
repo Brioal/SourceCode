@@ -26,7 +26,6 @@
         android:textSize="42sp"/>
 
     <EditText
-        android:text="brioal@foxmail.com"
         android:id="@+id/login_et_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,10 +37,10 @@
         android:drawablePadding="10dp"
         android:hint="请输入邮箱"
         android:padding="10dp"
+        android:text=""
         android:textSize="18sp"/>
 
     <EditText
-        android:text="q"
         android:id="@+id/login_et_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,7 +51,9 @@
         android:drawableLeft="@drawable/ic_pass_black"
         android:drawablePadding="10dp"
         android:hint="请输入密码"
+        android:inputType="textPassword"
         android:padding="10dp"
+        android:text=""
         android:textSize="18sp"/>
 
     <LinearLayout
